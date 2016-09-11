@@ -1,0 +1,72 @@
+buildscript {
+  repositories { jcenter() }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+  }
+	repositories {
+		mavenCentral()
+	}
+}
+
+plugins {
+  id "com.github.johnrengelman.shadow" version "1.2.3"
+}
+
+ext.mainClass = 'c1c.v8fs.Main'
+
+apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+repositories {
+    mavenCentral()
+    maven {
+    	url 'https://raw.github.com/Ekito/maven-repo/master/releases'
+    }
+}
+
+sourceCompatibility = 1.8
+version = 'latest-SNAPSHOT'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'v8fs',
+                   'Implementation-Version': version,
+                   'Main-Class': 'c1c.v8fs.Main'
+    }
+}
+
+shadowJar {
+   dependencies {
+      exclude(dependency('com.google.android:android:.*'))
+      exclude(dependency('org.eclipse.swt.win32.win32:.*'))
+    }
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    compile fileTree(dir: 'lib').matching { include '*.jar'}
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src'
+            include '**/*.xsd'
+            include '../schema/*.xsd'
+            include '**/*.png'
+            include '**/*.xml'
+            include '**/*.ftl'
+            include '**/*.properties'
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
+}
