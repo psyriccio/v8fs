@@ -33,20 +33,21 @@ public class Attributes implements Bufferable {
     private Date modifyDate;
     private long reserved;
     private String name;
-    
+    private Block block;
+
     private byte[] codeDateTime(Date dateTime) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateTime);
         long val = cal.getTimeInMillis();
         return UnsignedLong.fromLongBits(val).bigIntegerValue().toByteArray();
     }
-    
+
     private Date decodeDateTime(byte[] val) {
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(UnsignedLong.valueOf((new BigInteger(val))).longValue());
         return cal.getTime();
     }
-    
+
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         buffer.put(codeDateTime(creationDate)).put(codeDateTime(modifyDate)).putInt(UnsignedInteger.valueOf(reserved).intValue());
@@ -69,13 +70,13 @@ public class Attributes implements Bufferable {
         reserved = UnsignedInteger.fromIntBits(buffer.getInt()).longValue();
         name = "";
         boolean skip = false;
-        while(buffer.hasRemaining()) {
+        while (buffer.hasRemaining()) {
             char ch = (char) buffer.get();
-            if(!skip) {
+            if (!skip) {
                 name += ch;
             }
             skip = !skip;
         }
     }
-    
+
 }

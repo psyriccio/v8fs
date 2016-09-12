@@ -18,10 +18,52 @@ public class Main {
         return res;
     }
 
+    private static String toXXChars(String buf, int xxNum) {
+        String res = buf;
+        while (res.length() < xxNum) {
+            res = " " + res;
+        }
+        if (res.length() > xxNum) {
+            res = res.substring(0, xxNum - 1);
+        }
+        return res;
+    }
+
+    public static void printWithLevel(String msg, int level) {
+        String buf = "";
+        for (int k = 0; k < level; k++) {
+            buf += "\t";
+        }
+        System.out.println(buf + msg);
+    }
+
+    public static void printContent(Container cont, int level) {
+        for (c1c.v8fs.File fl : cont.getFiles().values()) {
+            try {
+                printWithLevel(
+                        "0x"
+                        + to8Digits(Long.toHexString(fl.getAttributes().getBlock().getAddress()))
+                        + " / 0x"
+                        + to8Digits(Long.toHexString(
+                                fl.getContent().getAddress()
+                        )) + " -> " + toXXChars(fl.getAttributes().getName(), 40) + "\t ("
+                        + Integer.toString(
+                                fl.getContent().getData().length
+                        ) + " bytes)", level
+                );
+            } catch (Exception ex) {
+                System.out.println(fl.toString());
+            }
+            if (fl.getChild() != null) {
+                printContent(fl.getChild(), level + 1);
+            }
+        }
+    }
+
     public static void main(String[] args) throws IOException {
 
         if (args.length == 0) {
-            args = new String[]{"test.epf"};
+            args = new String[]{"user2.cf"};
         }
 
         if (args.length == 0) {
@@ -42,24 +84,8 @@ public class Main {
 
             }
             System.out.println("Readed " + Integer.toString(container.getBlocks().size()) + " blocks");
-            System.out.println("Index:");
-            container.getIndex().getEntries().stream().forEach((iEnt) -> {
-                if (iEnt.getAttributesAddress() != 0) {
-                    Attributes attr = new Attributes();
-                    Block attBlk = null;
-                    for (Block blk : container.getBlocks()) {
-                        if (blk.getAddress() == iEnt.getAttributesAddress()) {
-                            attBlk = blk;
-                            break;
-                        }
-                    }
-                    if (attBlk != null) {
-                        ByteBuffer buf1 = ByteBuffer.wrap(attBlk.getData());
-                        attr.readFromBuffer(buf1);
-                    }
-                    System.out.println(to8Digits(Long.toHexString(iEnt.getAttributesAddress())) + ", " + to8Digits(Long.toHexString(iEnt.getContentAddress())) + ": " + attr.getName());
-                }
-            });
+            System.out.println("Content:");
+            printContent(container, 1);
         }
     }
 

@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Index implements Bufferable {
 
     private List<IndexEntry> entries;
-    
+
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         entries.stream().forEach((ent) -> {
@@ -35,11 +35,13 @@ public class Index implements Bufferable {
     @Override
     public void readFromBuffer(ByteBuffer buffer) {
         entries = new ArrayList<>();
-        while(buffer.hasRemaining()) {
+        while (buffer.hasRemaining()) {
             IndexEntry ent = new IndexEntry();
             ent.readFromBuffer(buffer);
-            entries.add(ent);
+            if (ent.getAttributesAddress() != 0L && ent.getContentAddress() != 0L) {
+                entries.add(ent);
+            }
         }
     }
-    
+
 }
