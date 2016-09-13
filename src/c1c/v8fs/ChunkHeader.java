@@ -6,7 +6,6 @@
 package c1c.v8fs;
 
 import com.google.common.primitives.UnsignedInteger;
-import com.google.common.primitives.UnsignedInts;
 import com.google.common.primitives.UnsignedLong;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
@@ -92,7 +91,7 @@ public class ChunkHeader implements Bufferable {
                 throw new RuntimeException("Format error");
             }
 
-            nextChunkPresent = (UnsignedLong.valueOf(nextChunkAddress).bigIntegerValue().compareTo(UnsignedInteger.MAX_VALUE.bigIntegerValue()) != 0);
+            nextChunkPresent = (!nextAddr.equals("7fffffff"));
 
         } catch (UnsupportedEncodingException ex) {
             throw new RuntimeException(ex);

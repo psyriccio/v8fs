@@ -33,7 +33,7 @@ public class Attributes implements Bufferable {
     private Date modifyDate;
     private long reserved;
     private String name;
-    private Block block;
+    private Chain chain;
 
     private byte[] codeDateTime(Date dateTime) {
         Calendar cal = Calendar.getInstance();

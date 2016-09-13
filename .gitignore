@@ -19,3 +19,4 @@ y
 hs_err_pid*
 *.blk
 *.cf
+/*.v8fs/

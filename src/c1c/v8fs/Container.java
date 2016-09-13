@@ -25,15 +25,15 @@ import lombok.NoArgsConstructor;
 public class Container implements Bufferable {
 
     private ContainerHeader header;
-    private List<Block> blocks;
+    private List<Chain> chains;
     private Index index;
     private HashMap<String, File> files;
-    private HashMap<Long, Block> blockIndex;
+    private HashMap<Long, Chain> chainIndex;
 
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         header.writeToBuffer(buffer);
-        blocks.stream().forEach((block) -> {
+        chains.stream().forEach((block) -> {
             block.writeToBuffer(buffer);
         });
     }
@@ -42,14 +42,14 @@ public class Container implements Bufferable {
     public void readFromBuffer(ByteBuffer buffer) {
         header = new ContainerHeader();
         header.readFromBuffer(buffer);
-        blocks = new ArrayList<>();
+        chains = new ArrayList<>();
         index = null;
-        blockIndex = new HashMap<>();
+        chainIndex = new HashMap<>();
         while (buffer.hasRemaining()) {
-            Block block = new Block();
+            Chain block = new Chain();
             block.readFromBuffer(buffer);
-            blocks.add(block);
-            blockIndex.put(block.getAddress(), block);
+            chains.add(block);
+            chainIndex.put(block.getAddress(), block);
             if (index == null) {
                 index = new Index();
                 index.readFromBuffer(ByteBuffer.wrap(block.getData()));
@@ -58,16 +58,16 @@ public class Container implements Bufferable {
         files = new HashMap<>();
         for (IndexEntry idx : index.getEntries()) {
             Attributes attr = new Attributes();
-            Block attrBlock = blockIndex.get(
+            Chain attrChain = chainIndex.get(
                     idx.getAttributesAddress()
             );
-            if (attrBlock != null) {
+            if (attrChain != null) {
                 attr.readFromBuffer(
-                        ByteBuffer.wrap(attrBlock.getData())
+                        ByteBuffer.wrap(attrChain.getData())
                 );
-                attr.setBlock(attrBlock);
+                attr.setChain(attrChain);
             }
-            Block content = blockIndex.get(idx.getContentAddress());
+            Chain content = chainIndex.get(idx.getContentAddress());
             File file = new File();
             file.setAttributes(attr);
             file.setContent(content);

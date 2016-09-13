@@ -27,12 +27,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Block implements Bufferable {
+public class Chain implements Bufferable {
 
     private long address;
     private List<Chunk> chunks;
 
-    public Block(byte[] data, int chunkSize) {
+    public Chain(byte[] data, int chunkSize) {
         ByteBuffer buf = ByteBuffer.wrap(data);
         int blockSize = data.length;
         while(buf.hasRemaining()) {

@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class File implements Bufferable {
 
     private Attributes attributes;
-    private Block content;
+    private Chain content;
     private Container child;
 
     public void inspectContent() {

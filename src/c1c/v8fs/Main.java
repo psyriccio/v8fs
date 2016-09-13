@@ -43,7 +43,7 @@ public class Main {
             try {
                 printWithLevel(
                         "0x"
-                        + to8Digits(Long.toHexString(fl.getAttributes().getBlock().getAddress()))
+                        + to8Digits(Long.toHexString(fl.getAttributes().getChain().getAddress()))
                         + " / 0x"
                         + to8Digits(Long.toHexString(
                                 fl.getContent().getAddress()
@@ -54,7 +54,7 @@ public class Main {
                 );
                 total += fl.getContent().getData().length;
             } catch (Exception ex) {
-                System.out.println(fl.toString());
+                printWithLevel(fl.toString(), level);
             }
             if (fl.getChild() != null) {
                 printContent(fl.getChild(), level + 1);
@@ -76,17 +76,19 @@ public class Main {
 
         File file = new File(args[0]);
         if (file.exists()) {
+            File dir = new File(file.getName() + ".v8fs/");
+            dir.mkdirs();
             byte[] content = Files.toByteArray(file);
             ByteBuffer buf = ByteBuffer.wrap(content);
             Container container = new Container();
             container.readFromBuffer(buf);
-            for (Block blk : container.getBlocks()) {
-                File bFile = new File(Integer.toString(container.getBlocks().indexOf(blk)) + ".blk");
+            for (Chain ch : container.getChains()) {
+                File bFile = new File(dir, Integer.toString(container.getChains().indexOf(ch)) + ".chain");
                 bFile.delete();
-                Files.write(blk.getData(), bFile);
+                Files.write(ch.getData(), bFile);
 
             }
-            System.out.println("Readed " + Integer.toString(container.getBlocks().size()) + " blocks");
+            System.out.println("Readed " + Integer.toString(container.getChains().size()) + " chains");
             System.out.println("Content:");
             printContent(container, 1);
         }
