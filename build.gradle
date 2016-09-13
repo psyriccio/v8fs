@@ -47,6 +47,10 @@ dependencies {
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.10'
     // https://mvnrepository.com/artifact/com.google.guava/guava
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    // https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.moxy
+    compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy', version: '2.6.3'
+    // https://mvnrepository.com/artifact/javax.mail/mail
+    compile group: 'javax.mail', name: 'mail', version: '1.4.7'
     compile fileTree(dir: 'lib').matching { include '*.jar'}
 }
 

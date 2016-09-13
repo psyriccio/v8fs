@@ -4,6 +4,11 @@ import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.HashMap;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.eclipse.persistence.jaxb.JAXBContextFactory;
 
 public class Main {
 
@@ -63,10 +68,10 @@ public class Main {
         printWithLevel("Total " + Long.toString(total) + " bytes", level);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, JAXBException {
 
         if (args.length == 0) {
-            args = new String[]{"user2.cf"};
+            args = new String[]{"test.epf"};
         }
 
         if (args.length == 0) {
@@ -76,7 +81,7 @@ public class Main {
 
         File file = new File(args[0]);
         if (file.exists()) {
-            File dir = new File(file.getName() + ".v8fs/");
+            File dir = new File(file.getName() + ".v8fs.debug/");
             dir.mkdirs();
             byte[] content = Files.toByteArray(file);
             ByteBuffer buf = ByteBuffer.wrap(content);
@@ -84,13 +89,39 @@ public class Main {
             container.readFromBuffer(buf);
             for (Chain ch : container.getChains()) {
                 File bFile = new File(dir, Integer.toString(container.getChains().indexOf(ch)) + ".chain");
+                File bFileInf = new File(dir, Integer.toString(container.getChains().indexOf(ch)) + ".chain.inflated ");
                 bFile.delete();
+                bFileInf.delete();
                 Files.write(ch.getData(), bFile);
-
+                System.out.println("0x" + to8Digits(Long.toHexString(ch.getAddress())) + " > " + bFile.getPath());
+                try {
+                    Files.write(ch.getDataInflate(), bFileInf);
+                } catch (Exception ex) {
+                    //
+                }
             }
             System.out.println("Readed " + Integer.toString(container.getChains().size()) + " chains");
             System.out.println("Content:");
             printContent(container, 1);
+            File xFile = new File(args[0] + ".xml");
+            xFile.delete();
+            JAXBContext context = JAXBContextFactory.createContext(
+                    new Class[]{
+                        Container.class,
+                        ContainerHeader.class,
+                        Chain.class,
+                        Chunk.class,
+                        ChunkHeader.class,
+                        Attributes.class,
+                        File.class,
+                        Index.class,
+                        IndexEntry.class
+                    }, new HashMap<String, Object>()
+            );
+            
+            Marshaller marsh = context.createMarshaller();
+            marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marsh.marshal(container, xFile);
         }
     }
 

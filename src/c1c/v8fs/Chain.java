@@ -14,10 +14,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Singular;
 
 /**
  *
@@ -25,14 +32,27 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Chain implements Bufferable {
 
-    private long address;
-    private List<Chunk> chunks;
+    private static int nextID = 0;
+    
+    private @XmlID @XmlAttribute String id;
+    private @XmlAttribute long address;
+    private @XmlElements(value = @XmlElement(name = "chunk")) @Singular List<Chunk> chunks;
 
+    private void setID() {
+        this.id = Integer.toHexString(++nextID);
+    }
+    
+    public Chain() {
+        setID();
+    }
+    
     public Chain(byte[] data, int chunkSize) {
+        setID();
         ByteBuffer buf = ByteBuffer.wrap(data);
         int blockSize = data.length;
         while(buf.hasRemaining()) {

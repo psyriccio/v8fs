@@ -7,6 +7,9 @@ package c1c.v8fs;
 
 import com.google.common.primitives.UnsignedInteger;
 import java.nio.ByteBuffer;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,11 +23,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
 public class IndexEntry implements Bufferable {
 
-    private long attributesAddress;
-    private long contentAddress;
-    private long reserved;
+    private @XmlAttribute long attributesAddress;
+    private @XmlAttribute long contentAddress;
+    private @XmlAttribute long reserved;
     
     @Override
     public void writeToBuffer(ByteBuffer buffer) {

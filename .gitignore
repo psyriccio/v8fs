@@ -20,3 +20,5 @@ hs_err_pid*
 *.blk
 *.cf
 /*.v8fs/
+/*.v8fs.debug/
+/*.xml

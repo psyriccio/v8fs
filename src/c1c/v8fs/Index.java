@@ -8,10 +8,15 @@ package c1c.v8fs;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 
 /**
  *
@@ -21,9 +26,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Index implements Bufferable {
 
-    private List<IndexEntry> entries;
+    private @XmlElements(value = @XmlElement(name = "entry")) @Singular List<IndexEntry> entries;
 
     @Override
     public void writeToBuffer(ByteBuffer buffer) {

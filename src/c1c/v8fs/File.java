@@ -6,7 +6,13 @@
 package c1c.v8fs;
 
 import java.nio.ByteBuffer;
-import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,16 +26,25 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "file")
 public class File implements Bufferable {
 
-    private Attributes attributes;
-    private Chain content;
-    private Container child;
+    private @XmlID @XmlAttribute String name;
+    private @XmlElement Attributes attributes;
+    private @XmlIDREF @XmlAttribute(name = "chain") Chain content;
+    private @XmlElement Container child;
 
+    public void setAttributes(Attributes val) {
+        this.name = val.getName();
+        this.attributes = val;
+    }
+    
     public void inspectContent() {
+        this.name = attributes.getName();
         byte[] data = null;
         try {
-            content.getDataInflate();
+            data = content.getDataInflate();
         } catch (Exception ex) {
             data = null;
         }

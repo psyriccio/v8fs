@@ -9,10 +9,17 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 
 /**
  *
@@ -22,12 +29,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@XmlRootElement(name = "v8fs")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Container implements Bufferable {
 
+    @XmlElement(name = "header")
     private ContainerHeader header;
-    private List<Chain> chains;
-    private Index index;
-    private HashMap<String, File> files;
+    
+    private @XmlElements(value = @XmlElement(name = "chain")) @Singular List<Chain> chains;
+    private @XmlElement(name = "index") Index index;
+    private @XmlJavaTypeAdapter(FileMapAdapter.class) HashMap<String, File> files;
     private HashMap<Long, Chain> chainIndex;
 
     @Override

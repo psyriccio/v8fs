@@ -11,6 +11,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.google.common.primitives.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  *
@@ -20,12 +23,13 @@ import com.google.common.primitives.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ContainerHeader implements Bufferable {
 
-    private long firstFreeChunkAddress;
-    private long defaultChunkSize;
-    private long reservedMaybeFilesCount;
-    private long reservedUnknown;
+    private @XmlAttribute long firstFreeChunkAddress;
+    private @XmlAttribute long defaultChunkSize;
+    private @XmlAttribute long reservedMaybeFilesCount;
+    private @XmlAttribute long reservedUnknown;
     
     @Override
     public void writeToBuffer(ByteBuffer buffer) {

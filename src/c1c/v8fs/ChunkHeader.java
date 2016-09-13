@@ -6,9 +6,11 @@
 package c1c.v8fs;
 
 import com.google.common.primitives.UnsignedInteger;
-import com.google.common.primitives.UnsignedLong;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,12 +24,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ChunkHeader implements Bufferable {
 
-    private long blockSize;
-    private long thisChunkSize;
-    private long nextChunkAddress;
-    private boolean nextChunkPresent;
+    private @XmlAttribute long blockSize;
+    private @XmlAttribute long thisChunkSize;
+    private @XmlAttribute long nextChunkAddress;
+    private @XmlAttribute boolean nextChunkPresent;
 
     private String get8Chars(ByteBuffer buf) {
         String res = "";

@@ -7,10 +7,15 @@ package c1c.v8fs;
 
 import com.google.common.primitives.UnsignedInteger;
 import java.nio.ByteBuffer;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlInlineBinaryData;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  *
@@ -18,14 +23,26 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Chunk implements Bufferable {
 
-    private ChunkHeader header;
-    private byte[] data;
+    private static int nextID = 0;
+    
+    private @XmlID @XmlAttribute String id;
+    private @XmlElement ChunkHeader header;
+    private @XmlInlineBinaryData byte[] data;
+    
+    private void setID() {
+        this.id = Integer.toHexString(++nextID);
+    }
+    
+    public Chunk() {
+        setID();
+    }
     
     public Chunk(byte[] data, int blockSize, boolean hasNext) {
+        setID();
         this.data = data;
         header = new ChunkHeader(blockSize, data.length, 0, hasNext);
     }
