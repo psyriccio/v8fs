@@ -12,12 +12,12 @@ import com.google.common.primitives.UnsignedLong;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlIDREF;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +35,6 @@ import lombok.NoArgsConstructor;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Attributes implements Bufferable {
 
-    
     private @XmlAttribute Date creationDate;
     private @XmlAttribute Date modifyDate;
     private @XmlAttribute long reserved;
@@ -46,12 +45,25 @@ public class Attributes implements Bufferable {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateTime);
         long val = cal.getTimeInMillis();
-        return UnsignedLong.fromLongBits(val).bigIntegerValue().toByteArray();
+        byte[] res = UnsignedLong.fromLongBits(val)
+                .bigIntegerValue().multiply(
+                        BigInteger.TEN.multiply(BigInteger.TEN).multiply(BigInteger.ONE.add(BigInteger.ONE))
+                ).toByteArray();
+        //ArrayUtils.reverse(res);
+        return res;
     }
 
     private Date decodeDateTime(byte[] val) {
+        byte[] arr = Arrays.copyOf(val, val.length);
+        //ArrayUtils.reverse(arr);
         Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(UnsignedLong.valueOf((new BigInteger(val))).longValue());
+        cal.setTimeInMillis(
+                UnsignedLong.valueOf(
+                        (new BigInteger(arr).divide(
+                                BigInteger.TEN.multiply(BigInteger.TEN).multiply(BigInteger.ONE.add(BigInteger.ONE))
+                        ))
+                ).longValue()
+        );
         return cal.getTime();
     }
 

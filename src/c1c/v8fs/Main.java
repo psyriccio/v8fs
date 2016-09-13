@@ -12,7 +12,7 @@ import org.eclipse.persistence.jaxb.JAXBContextFactory;
 
 public class Main {
 
-    private static String to8Digits(String buf) {
+    public static String to8Digits(String buf) {
         String res = buf;
         while (res.length() < 8) {
             res = "0" + res;
@@ -118,7 +118,7 @@ public class Main {
                         IndexEntry.class
                     }, new HashMap<String, Object>()
             );
-            
+
             Marshaller marsh = context.createMarshaller();
             marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marsh.marshal(container, xFile);

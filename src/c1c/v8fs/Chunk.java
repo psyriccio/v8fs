@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlInlineBinaryData;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -28,28 +29,28 @@ import lombok.Data;
 public class Chunk implements Bufferable {
 
     private static int nextID = 0;
-    
+
     private @XmlID @XmlAttribute String id;
-    private @XmlElement ChunkHeader header;
+    private @XmlPath(".") @XmlElement ChunkHeader header;
     private @XmlInlineBinaryData byte[] data;
-    
+
     private void setID() {
         this.id = Integer.toHexString(++nextID);
     }
-    
+
     public Chunk() {
         setID();
     }
-    
+
     public Chunk(byte[] data, int blockSize, boolean hasNext) {
         setID();
         this.data = data;
         header = new ChunkHeader(blockSize, data.length, 0, hasNext);
     }
-    
+
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
-        if(header.isNextChunkPresent()) {
+        if (header.isNextChunkPresent()) {
             header.setNextChunkAddress(buffer.position() + 31 + data.length);
         } else {
             header.setNextChunkAddress(UnsignedInteger.MAX_VALUE.longValue());
@@ -65,5 +66,5 @@ public class Chunk implements Bufferable {
         data = new byte[UnsignedInteger.valueOf(header.getThisChunkSize()).intValue()];
         buffer.get(data);
     }
-    
+
 }

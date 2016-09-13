@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -31,15 +32,15 @@ import lombok.NoArgsConstructor;
 public class File implements Bufferable {
 
     private @XmlID @XmlAttribute String name;
-    private @XmlElement Attributes attributes;
+    private @XmlPath(".") @XmlElement Attributes attributes;
     private @XmlIDREF @XmlAttribute(name = "chain") Chain content;
-    private @XmlElement Container child;
+    private @XmlElement(name = "container") Container child;
 
     public void setAttributes(Attributes val) {
         this.name = val.getName();
         this.attributes = val;
     }
-    
+
     public void inspectContent() {
         this.name = attributes.getName();
         byte[] data = null;

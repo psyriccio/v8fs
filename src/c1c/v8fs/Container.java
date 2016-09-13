@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Singular;
+import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  *
@@ -34,12 +35,11 @@ import lombok.Singular;
 public class Container implements Bufferable {
 
     @XmlElement(name = "header")
-    private ContainerHeader header;
-    
+    private @XmlPath(".") ContainerHeader header;
     private @XmlElements(value = @XmlElement(name = "chain")) @Singular List<Chain> chains;
     private @XmlElement(name = "index") Index index;
     private @XmlJavaTypeAdapter(FileMapAdapter.class) HashMap<String, File> files;
-    private HashMap<Long, Chain> chainIndex;
+    private @XmlJavaTypeAdapter(ChainIndexAdapter.class) HashMap<Long, Chain> chainIndex;
 
     @Override
     public void writeToBuffer(ByteBuffer buffer) {

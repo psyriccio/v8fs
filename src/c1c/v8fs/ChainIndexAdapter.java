@@ -9,34 +9,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import org.eclipse.persistence.oxm.annotations.XmlPath;
 import org.eclipse.persistence.oxm.annotations.XmlVariableNode;
 
 /**
  *
  * @author psyriccio
  */
-public class FileMapAdapter extends XmlAdapter<FileMapAdapter.FileAdaptedMap, Map<String, File>> {
+public class ChainIndexAdapter extends XmlAdapter<ChainIndexAdapter.ChainIndexAdaptedMap, Map<Long, Chain>> {
 
     @Override
-    public Map<String, File> unmarshal(FileAdaptedMap v) throws Exception {
-        Map<String, File> res = new HashMap<>();
+    public Map<Long, Chain> unmarshal(ChainIndexAdaptedMap v) throws Exception {
+        Map<Long, Chain> res = new HashMap<>();
         v.entries.stream().forEach((ent) -> {
-            res.put(ent.key, ent.value);
+            res.put(Long.parseLong(ent.key, 16), ent.value);
         });
         return res;
     }
 
     @Override
-    public FileAdaptedMap marshal(Map<String, File> v) throws Exception {
-        FileAdaptedMap res = new FileAdaptedMap();
+    public ChainIndexAdaptedMap marshal(Map<Long, Chain> v) throws Exception {
+        ChainIndexAdaptedMap res = new ChainIndexAdaptedMap();
         res.entries = new ArrayList<>();
         v.keySet().stream().map((key) -> {
-            FileMapAdaptedEntry ent = new FileMapAdaptedEntry();
-            ent.key = key;
+            ChainIndexAdaptedEntry ent = new ChainIndexAdaptedEntry();
+            ent.key = Main.to8Digits(Long.toHexString(key));
             ent.value = v.get(key);
             return ent;
         }).forEach((ent) -> {
@@ -45,16 +45,16 @@ public class FileMapAdapter extends XmlAdapter<FileMapAdapter.FileAdaptedMap, Ma
         return res;
     }
 
-    public static class FileAdaptedMap {
+    public static class ChainIndexAdaptedMap {
 
-        @XmlVariableNode("key") List<FileMapAdaptedEntry> entries = new ArrayList<>();
+        @XmlVariableNode("key") List<ChainIndexAdaptedEntry> entries = new ArrayList<>();
 
     }
 
-    public static class FileMapAdaptedEntry {
+    public static class ChainIndexAdaptedEntry {
 
         public @XmlTransient String key;
-        public @XmlPath(".") @XmlElement(name = "def") File value;
+        public @XmlIDREF @XmlAttribute(name = "chain") Chain value;
 
     }
 

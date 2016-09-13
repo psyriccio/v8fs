@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,28 +39,40 @@ import lombok.Singular;
 public class Chain implements Bufferable {
 
     private static int nextID = 0;
-    
+
     private @XmlID @XmlAttribute String id;
-    private @XmlAttribute long address;
+
+    private @XmlTransient long address;
+
     private @XmlElements(value = @XmlElement(name = "chunk")) @Singular List<Chunk> chunks;
+
+    @XmlAttribute(name = "address")
+    private String getAddressXML() {
+        return Main.to8Digits(Long.toHexString(address));
+    }
+
+    @XmlAttribute(name = "address")
+    private void setAddressXML(String val) {
+        this.address = Long.parseLong(val, 16);
+    }
 
     private void setID() {
         this.id = Integer.toHexString(++nextID);
     }
-    
+
     public Chain() {
         setID();
     }
-    
+
     public Chain(byte[] data, int chunkSize) {
         setID();
         ByteBuffer buf = ByteBuffer.wrap(data);
         int blockSize = data.length;
-        while(buf.hasRemaining()) {
-            if(chunkSize <= buf.remaining()) {
-               Chunk chunk = new Chunk(buf.array(), buf.remaining(), false);
-               chunks.add(chunk);
-               break;
+        while (buf.hasRemaining()) {
+            if (chunkSize <= buf.remaining()) {
+                Chunk chunk = new Chunk(buf.array(), buf.remaining(), false);
+                chunks.add(chunk);
+                break;
             } else {
                 byte[] chd = new byte[chunkSize];
                 buf.get(chd);
@@ -68,14 +81,14 @@ public class Chain implements Bufferable {
             }
         }
     }
-    
+
     public byte[] getData() {
         long length = chunks.get(0).getHeader().getBlockSize();
         byte[] res = new byte[(int) length];
         ByteBuffer buf = ByteBuffer.wrap(res);
-        for(Chunk chunk : chunks) {
+        for (Chunk chunk : chunks) {
             byte[] chdata = chunk.getData();
-            if(length >= chunk.getHeader().getThisChunkSize()) {
+            if (length >= chunk.getHeader().getThisChunkSize()) {
                 buf.put(chdata);
                 length -= chdata.length;
             } else {
@@ -84,14 +97,14 @@ public class Chain implements Bufferable {
         };
         return res;
     }
-    
+
     public byte[] getDataInflate() throws IOException {
         byte[] buf = getData();
         ByteArrayInputStream in = new ByteArrayInputStream(buf);
         InflaterInputStream inf = new InflaterInputStream(in, new Inflater(true));
         return ByteStreams.toByteArray(inf);
     }
-    
+
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         chunks.stream().forEach((chunk) -> {
@@ -104,12 +117,12 @@ public class Chain implements Bufferable {
         chunks = new ArrayList<>();
         boolean next = true;
         address = buffer.position();
-        while(next) {
+        while (next) {
             Chunk chunk = new Chunk();
             chunk.readFromBuffer(buffer);
             chunks.add(chunk);
             next = chunk.getHeader().isNextChunkPresent();
         }
     }
-    
+
 }
