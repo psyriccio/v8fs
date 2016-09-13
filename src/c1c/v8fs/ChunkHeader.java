@@ -7,6 +7,7 @@ package c1c.v8fs;
 
 import com.google.common.primitives.UnsignedInteger;
 import com.google.common.primitives.UnsignedInts;
+import com.google.common.primitives.UnsignedLong;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import lombok.AllArgsConstructor;
@@ -49,11 +50,11 @@ public class ChunkHeader implements Bufferable {
     }
 
     private long hexToInt(String hex) {
-        return UnsignedInteger.fromIntBits(UnsignedInts.parseUnsignedInt(hex, 16)).longValue();
+        return UnsignedInteger.valueOf(hex, 16).longValue();
     }
 
     private String toStringBuffer() {
-        return "\r\n" + intToHex(blockSize) + " " + intToHex(thisChunkSize) + " " + (nextChunkPresent ? intToHex(nextChunkAddress) : intToHex(Integer.MAX_VALUE) + " \r\n");
+        return "\r\n" + intToHex(blockSize) + " " + intToHex(thisChunkSize) + " " + (nextChunkPresent ? intToHex(nextChunkAddress) : intToHex(UnsignedInteger.MAX_VALUE.longValue()) + " \r\n");
     }
 
     private void fromStringBuffer(String str) {
@@ -79,7 +80,8 @@ public class ChunkHeader implements Bufferable {
                 throw new RuntimeException("Format error");
             }
 
-            nextChunkAddress = hexToInt(get8Chars(buf));
+            String nextAddr = get8Chars(buf);
+            nextChunkAddress = hexToInt(nextAddr);
 
             b = (char) buf.get();
             if (b != ' ') {
@@ -90,7 +92,7 @@ public class ChunkHeader implements Bufferable {
                 throw new RuntimeException("Format error");
             }
 
-            nextChunkPresent = (nextChunkAddress == UnsignedInteger.MAX_VALUE.longValue());
+            nextChunkPresent = (UnsignedLong.valueOf(nextChunkAddress).bigIntegerValue().compareTo(UnsignedInteger.MAX_VALUE.bigIntegerValue()) != 0);
 
         } catch (UnsupportedEncodingException ex) {
             throw new RuntimeException(ex);

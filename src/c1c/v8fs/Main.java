@@ -38,6 +38,7 @@ public class Main {
     }
 
     public static void printContent(Container cont, int level) {
+        long total = 0L;
         for (c1c.v8fs.File fl : cont.getFiles().values()) {
             try {
                 printWithLevel(
@@ -51,6 +52,7 @@ public class Main {
                                 fl.getContent().getData().length
                         ) + " bytes)", level
                 );
+                total += fl.getContent().getData().length;
             } catch (Exception ex) {
                 System.out.println(fl.toString());
             }
@@ -58,6 +60,7 @@ public class Main {
                 printContent(fl.getChild(), level + 1);
             }
         }
+        printWithLevel("Total " + Long.toString(total) + " bytes", level);
     }
 
     public static void main(String[] args) throws IOException {
