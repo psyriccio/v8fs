@@ -19,7 +19,7 @@
    </xsd:complexType>
    <xsd:complexType name="chunk">
       <xsd:sequence>
-         <xsd:element name="data" type="xsd:hexBinary" minOccurs="0"/>
+         <xsd:element name="data" type="dataAttayAdaptedList" minOccurs="0"/>
       </xsd:sequence>
       <xsd:attribute name="id" type="xsd:ID"/>
       <xsd:attribute name="blockSize" type="xsd:long" use="required"/>
@@ -68,6 +68,12 @@
       <xsd:attribute name="contentAddress" type="xsd:string"/>
       <xsd:attribute name="reserved" type="xsd:string"/>
    </xsd:complexType>
+   <xsd:complexType name="dataAttayAdaptedList">
+      <xsd:sequence>
+         <xsd:any processContents="skip" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="id" type="xsd:ID"/>
+   </xsd:complexType>
    <xsd:complexType name="fileAdaptedMap">
       <xsd:sequence>
          <xsd:any processContents="skip" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
@@ -110,4 +116,7 @@
    <xsd:element name="chain" type="chain"/>
    <xsd:element name="v8fs" type="container"/>
    <xsd:element name="file" type="file"/>
+   <xsd:simpleType name="dataArrayAdaptedItem">
+      <xsd:restriction base="xsd:base64Binary"/>
+   </xsd:simpleType>
 </xsd:schema>

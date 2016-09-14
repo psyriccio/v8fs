@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlInlineBinaryData;
 import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,7 +35,7 @@ public class Chunk implements Bufferable {
 
     private @XmlID @XmlAttribute String id;
     private @XmlPath(".") @XmlElement ChunkHeader header;
-    private @XmlInlineBinaryData @XmlSchemaType(name = "hexBinary") byte[] data;
+    private @XmlJavaTypeAdapter(DataArrayAdapter.class) byte[] data;
 
     private void setID() {
         this.id = Integer.toHexString(++nextID);
