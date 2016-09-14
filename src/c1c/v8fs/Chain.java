@@ -28,6 +28,7 @@ import lombok.Data;
 import lombok.Singular;
 
 /**
+ * Chain of chunks, representing a logical, solid block of data
  *
  * @author psyriccio
  */

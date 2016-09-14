@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
+ * Represents logical file object. Contains two chains: attributes and data
  *
  * @author psyriccio
  */

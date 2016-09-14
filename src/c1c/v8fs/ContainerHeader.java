@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
+ * Container header
  *
  * @author psyriccio
  */
@@ -30,7 +31,7 @@ public class ContainerHeader implements Bufferable {
     private @XmlAttribute long defaultChunkSize;
     private @XmlAttribute long reservedMaybeFilesCount;
     private @XmlAttribute long reservedUnknown;
-    
+
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         buffer
@@ -47,5 +48,5 @@ public class ContainerHeader implements Bufferable {
         reservedMaybeFilesCount = UnsignedInteger.fromIntBits(Integer.reverseBytes(buffer.getInt())).longValue();
         reservedUnknown = UnsignedInteger.fromIntBits(Integer.reverseBytes(buffer.getInt())).longValue();
     }
-    
+
 }

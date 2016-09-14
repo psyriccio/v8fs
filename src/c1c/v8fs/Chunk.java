@@ -13,12 +13,14 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlInlineBinaryData;
+import javax.xml.bind.annotation.XmlSchemaType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
+ * A minimal piece of data in matadata containers
  *
  * @author psyriccio
  */
@@ -32,7 +34,7 @@ public class Chunk implements Bufferable {
 
     private @XmlID @XmlAttribute String id;
     private @XmlPath(".") @XmlElement ChunkHeader header;
-    private @XmlInlineBinaryData byte[] data;
+    private @XmlInlineBinaryData @XmlSchemaType(name = "hexBinary") byte[] data;
 
     private void setID() {
         this.id = Integer.toHexString(++nextID);

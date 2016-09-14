@@ -16,6 +16,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 import org.eclipse.persistence.oxm.annotations.XmlVariableNode;
 
 /**
+ * JAXB XmlAdapter. Improve JAXB-serialization of files HashMap
  *
  * @author psyriccio
  */

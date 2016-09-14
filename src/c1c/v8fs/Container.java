@@ -23,6 +23,7 @@ import lombok.Singular;
 import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
+ * Main container class, representing a root or slave metadata container
  *
  * @author psyriccio
  */
@@ -34,8 +35,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Container implements Bufferable {
 
-    @XmlElement(name = "header")
-    private @XmlPath(".") ContainerHeader header;
+    private @XmlPath(".") @XmlElement(name = "header") ContainerHeader header;
     private @XmlElements(value = @XmlElement(name = "chain")) @Singular List<Chain> chains;
     private @XmlElement(name = "index") Index index;
     private @XmlJavaTypeAdapter(FileMapAdapter.class) HashMap<String, File> files;

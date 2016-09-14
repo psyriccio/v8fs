@@ -19,6 +19,8 @@ import lombok.NoArgsConstructor;
 import lombok.Singular;
 
 /**
+ * File index from first chain in container (like a FAT-table in FAT(XX) file
+ * systems)
  *
  * @author psyriccio
  */

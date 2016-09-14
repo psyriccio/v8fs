@@ -8,10 +8,22 @@ import java.util.HashMap;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.SchemaOutputResolver;
+import javax.xml.transform.Result;
+import javax.xml.transform.stream.StreamResult;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 
+/**
+ * Testing class (unit tests is coming soon)
+ */
 public class Main {
 
+    /**
+     * Utility method. Extends string hex-number values to 8 digits with leading
+     * zeros
+     *
+     * @param buf value to extend
+     */
     public static String to8Digits(String buf) {
         String res = buf;
         while (res.length() < 8) {
@@ -122,6 +134,16 @@ public class Main {
             Marshaller marsh = context.createMarshaller();
             marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marsh.marshal(container, xFile);
+            final String arg0 = args[0];
+            context.generateSchema(new SchemaOutputResolver() {
+                @Override
+                public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+                    File schFile = new File(arg0 + ".schema");
+                    StreamResult result = new StreamResult(schFile);
+                    result.setSystemId(schFile.toURI().toURL().toString());
+                    return result;
+                }
+            });
         }
     }
 

@@ -10,12 +10,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+import org.eclipse.persistence.oxm.annotations.XmlNamedAttributeNode;
 import org.eclipse.persistence.oxm.annotations.XmlVariableNode;
 
 /**
+ * JAXB XmlAdapter. Improve JAXB-serialization of chains index HashMap
  *
  * @author psyriccio
  */
@@ -47,10 +50,30 @@ public class ChainIndexAdapter extends XmlAdapter<ChainIndexAdapter.ChainIndexAd
 
     public static class ChainIndexAdaptedMap {
 
-        @XmlVariableNode("key") List<ChainIndexAdaptedEntry> entries = new ArrayList<>();
+        private static int nextID = 0;
+
+        private @XmlTransient String id = "";
+
+        @XmlID
+        @XmlAttribute(name = "id")
+        public String getIDXML() {
+            if (this.id.isEmpty()) {
+                this.id = Integer.toHexString(nextID++);
+            }
+            return this.id;
+        }
+
+        @XmlID
+        @XmlAttribute(name = "id")
+        public void setIDXML(String id) {
+            this.id = id;
+        }
+
+        @XmlVariableNode(value = "key") List<ChainIndexAdaptedEntry> entries = new ArrayList<>();
 
     }
 
+    @XmlNamedAttributeNode(value = "key")
     public static class ChainIndexAdaptedEntry {
 
         public @XmlTransient String key;

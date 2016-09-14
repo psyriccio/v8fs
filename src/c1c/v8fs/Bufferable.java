@@ -8,12 +8,14 @@ package c1c.v8fs;
 import java.nio.ByteBuffer;
 
 /**
+ * Reading/Writing from/to buffer base feature interface
  *
  * @author psyriccio
  */
 public interface Bufferable {
 
     public void writeToBuffer(ByteBuffer buffer);
+
     public void readFromBuffer(ByteBuffer buffer);
-    
+
 }
