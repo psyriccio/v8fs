@@ -31,7 +31,7 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = "v8fs")
+@XmlRootElement(name = "v8fs", namespace = "http://psyzzy.net/v8fs")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Container implements Bufferable {
 

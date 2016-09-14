@@ -13,6 +13,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlInlineBinaryData;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
@@ -62,12 +63,15 @@ public class DataArrayAdapter extends XmlAdapter<DataArrayAdapter.DataAttayAdapt
         return res;
     }
 
+    @XmlRootElement(name = "data", namespace = "http://psyzzy.net/v8fs-data")
     public static class DataAttayAdaptedList {
 
         private static int nextId = 0;
 
         public @XmlTransient int id = nextId++;
-        public @XmlVariableNode("index") List<DataArrayAdaptedItem> entities = new ArrayList<>();
+
+        @XmlVariableNode("index")
+        public List<DataArrayAdaptedItem> entities = new ArrayList<>();
 
         @XmlID
         @XmlAttribute(name = "id")

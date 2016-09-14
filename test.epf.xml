@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<v8fs firstFreeChunkAddress="2147483647" defaultChunkSize="512" reservedMaybeFilesCount="8" reservedUnknown="0">
+<v8fs xmlns="http://psyzzy.net/v8fs" xmlns:dt="http://psyzzy.net/v8fs-data" firstFreeChunkAddress="2147483647" defaultChunkSize="512" reservedMaybeFilesCount="8" reservedUnknown="0">
    <chain id="1" address="00000010">
       <chunk id="1" blockSize="96" thisChunkSize="512" nextChunkPresent="false" nextChunkAddress="7fffffff">
          <data id="0">

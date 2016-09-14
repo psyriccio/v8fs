@@ -37,8 +37,13 @@ public class FileMapAdapter extends XmlAdapter<FileMapAdapter.FileAdaptedMap, Ma
         res.entries = new ArrayList<>();
         v.keySet().stream().map((key) -> {
             FileMapAdaptedEntry ent = new FileMapAdaptedEntry();
-            ent.key = key;
-            ent.value = v.get(key);
+            if (key != null) {
+                ent.key = key;
+                ent.value = v.get(key);
+            } else {
+                ent.key = "@NULL";
+                ent.value = new File();
+            }
             return ent;
         }).forEach((ent) -> {
             res.entries.add(ent);
