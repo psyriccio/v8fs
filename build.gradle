@@ -53,8 +53,12 @@ dependencies {
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    // https://mvnrepository.com/artifact/fr.faylixe/marklet
+    //compile group: 'fr.faylixe', name: 'marklet', version: '1.0.5'
     compile fileTree(dir: 'lib').matching { include '*.jar'}
 }
+
+apply plugin: 'java'
 
 sourceSets {
     main {
