@@ -138,7 +138,7 @@ public class Main {
             context.generateSchema(new SchemaOutputResolver() {
                 @Override
                 public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-                    File schFile = new File(arg0 + ".schema");
+                    File schFile = new File(arg0 + ".xsd");
                     StreamResult result = new StreamResult(schFile);
                     result.setSystemId(schFile.toURI().toURL().toString());
                     return result;
