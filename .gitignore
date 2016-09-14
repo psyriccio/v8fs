@@ -22,4 +22,4 @@ hs_err_pid*
 *.cf
 /*.v8fs/
 /*.v8fs.debug/
-/*.xml
+
