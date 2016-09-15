@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:ns0="http://psyzzy.net/v8fs-data" xmlns:ns1="http://psyzzy.net/v8fs" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://psyzzy.net/v8fs-data">
-   <xsd:import schemaLocation="test.epf.xsd" namespace="http://psyzzy.net/v8fs"/>
-   <xsd:element name="data" type="ns1:dataAttayAdaptedList"/>
+<xsd:schema xmlns:ns0="http://psyzzy.net/v8fs" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://psyzzy.net/v8fs">
+   <xsd:import schemaLocation="test.epf.xsd"/>
+   <xsd:element name="v8fs" type="container"/>
 </xsd:schema>
