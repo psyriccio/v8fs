@@ -28,7 +28,7 @@ public class ChainIndexAdapter extends XmlAdapter<ChainIndexAdapter.ChainIndexAd
     public Map<Long, Chain> unmarshal(ChainIndexAdaptedMap v) throws Exception {
         Map<Long, Chain> res = new HashMap<>();
         v.entries.stream().forEach((ent) -> {
-            res.put(Long.parseLong(ent.key, 16), ent.value);
+            res.put(Long.parseUnsignedLong(ent.key, 16), ent.value);
         });
         return res;
     }

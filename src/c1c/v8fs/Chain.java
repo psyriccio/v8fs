@@ -54,7 +54,7 @@ public class Chain implements Bufferable {
 
     @XmlAttribute(name = "address")
     private void setAddressXML(String val) {
-        this.address = Long.parseLong(val, 16);
+        this.address = Long.parseUnsignedLong(val, 16);
     }
 
     private void setID() {
