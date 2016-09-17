@@ -12,9 +12,6 @@ import java.util.stream.Collectors;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.SchemaOutputResolver;
-import javax.xml.transform.Result;
-import javax.xml.transform.stream.StreamResult;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 import org.eclipse.persistence.jaxb.JAXBContextProperties;
 import org.reflections.Reflections;
@@ -133,7 +130,7 @@ public class Main {
 
             List<Object> bindings = new Reflections(
                     new ConfigurationBuilder()
-                    .forPackages("jaxb/bindings")
+                    .forPackages("c1c/v8fs/jaxb/bindings")
                     .setScanners(new ResourcesScanner())
             ).getResources(
                     (nm) -> (nm != null ? nm.matches(".+-bindings\\.xml") : false)
