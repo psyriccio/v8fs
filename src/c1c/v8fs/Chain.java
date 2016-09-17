@@ -37,14 +37,6 @@ public class Chain implements Bufferable {
 
     private @Singular List<Chunk> chunks;
 
-    private String getAddressXML() {
-        return Main.to8Digits(Long.toHexString(address));
-    }
-
-    private void setAddressXML(String val) {
-        this.address = Long.parseUnsignedLong(val, 16);
-    }
-
     private void setID() {
         this.id = Integer.toHexString(++nextID);
     }

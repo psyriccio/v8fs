@@ -29,14 +29,6 @@ public class ChunkHeader implements Bufferable {
     private long nextChunkAddress;
     private boolean nextChunkPresent;
 
-    public String getNextChunkAddressXML() {
-        return Main.to8Digits(Long.toHexString(this.nextChunkAddress));
-    }
-
-    public void setNextChunkAddressXML(String val) {
-        this.nextChunkAddress = Long.parseUnsignedLong(val, 16);
-    }
-
     private String get8Chars(ByteBuffer buf) {
         String res = "";
         for (int k = 0; k <= 7; k++) {

@@ -28,30 +28,6 @@ public class IndexEntry implements Bufferable {
     private long contentAddress;
     private long reserved;
 
-    public String getAttributesAddressXML() {
-        return Main.to8Digits(Long.toHexString(this.attributesAddress));
-    }
-
-    public void setAttributesAddressXML(String val) {
-        this.attributesAddress = Long.parseUnsignedLong(val, 16);
-    }
-
-    public String getContentAddressXML() {
-        return Main.to8Digits(Long.toHexString(this.contentAddress));
-    }
-
-    public void setContentAddressXML(String val) {
-        this.contentAddress = Long.parseUnsignedLong(val, 16);
-    }
-
-    public String getReservedXML() {
-        return Main.to8Digits(Long.toHexString(this.reserved));
-    }
-
-    public void setReservedXML(String val) {
-        this.reserved = Long.parseUnsignedLong(val, 16);
-    }
-
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
 

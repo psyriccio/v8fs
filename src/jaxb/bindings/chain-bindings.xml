@@ -13,8 +13,8 @@
                 <xml-elements java-attribute="chunks">
                     <xml-element name="chunk" />
                 </xml-elements>
-                <xml-attribute java-attribute="address" name="address" type="java.lang.String" xml-accessor-type="PROPERTY">
-                    <xml-access-methods get-method="getAddressXML" set-method="setAddressXML"/>
+                <xml-attribute java-attribute="address" name="address">
+                    <xml-java-type-adapter value="c1c.v8fs.AddressHexAdapter" />
                 </xml-attribute>
             </java-attributes>
         </java-type>

@@ -20,10 +20,3 @@
 
 
 </xml-bindings>
-
-<!--private @XmlAttribute Date creationDate;
-    private @XmlAttribute Date modifyDate;
-    private @XmlAttribute long reserved;
-    private @XmlAttribute String name;
-    private @XmlIDREF @XmlAttribute(name = "chain") Chain chain;
--->

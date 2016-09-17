@@ -9,14 +9,14 @@
 
         <java-type name="c1c.v8fs.IndexEntry" xml-accessor-type="FIELD">
             <java-attributes>
-                <xml-attribute java-attribute="attributesAddress" name="attributesAddress" type="java.lang.String" xml-accessor-type="PROPERTY">
-                    <xml-access-methods get-method="getAttributesAddressXML" set-method="setAttributesAddressXML" />
+                <xml-attribute java-attribute="attributesAddress" name="attributesAddress">
+                    <xml-java-type-adapter value="c1c.v8fs.AddressHexAdapter" />
                 </xml-attribute>
-                <xml-attribute java-attribute="contentAddress" name="contentAddress" type="java.lang.String" xml-accessor-type="PROPERTY">
-                    <xml-access-methods get-method="getContentAddressXML" set-method="setContentAddressXML" />
+                <xml-attribute java-attribute="contentAddress" name="contentAddress">
+                    <xml-java-type-adapter value="c1c.v8fs.AddressHexAdapter" />
                 </xml-attribute>
-                <xml-attribute java-attribute="reserved" name="reserved" type="java.lang.String" xml-accessor-type="PROPERTY">
-                    <xml-access-methods get-method="getReservedXML" set-method="setReservedXML" />
+                <xml-attribute java-attribute="reserved" name="reserved">
+                    <xml-java-type-adapter value="c1c.v8fs.AddressHexAdapter" />
                 </xml-attribute>
             </java-attributes>
         </java-type>

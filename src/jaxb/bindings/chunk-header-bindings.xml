@@ -12,8 +12,8 @@
                 <xml-attribute java-attribute="blockSize" name="blockSize" />
                 <xml-attribute java-attribute="thisChunkSize" name="thisChunkSize" />
                 <xml-attribute java-attribute="nextChunkPresent" name="nextChunkPresent" />
-                <xml-attribute java-attribute="nextChunkAddress" name="nextChunkAddress" type="java.lang.String" xml-accessor-type="PROPERTY">
-                    <xml-access-methods get-method="getNextChunkAddressXML" set-method="setNextChunkAddressXML" />
+                <xml-attribute java-attribute="nextChunkAddress" name="nextChunkAddress" >
+                    <xml-java-type-adapter value="c1c.v8fs.AddressHexAdapter" />
                 </xml-attribute>
             </java-attributes>
         </java-type>
