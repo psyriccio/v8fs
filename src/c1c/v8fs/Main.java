@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.SchemaOutputResolver;
+import javax.xml.transform.Result;
+import javax.xml.transform.stream.StreamResult;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 import org.eclipse.persistence.jaxb.JAXBContextProperties;
 import org.reflections.Reflections;
@@ -108,6 +111,7 @@ public class Main {
             byte[] content = Files.toByteArray(file);
             ByteBuffer buf = ByteBuffer.wrap(content);
             Container container = new Container();
+            container.getContainerContext().put("FileName", file.getName());
             container.readFromBuffer(buf);
             for (Chain ch : container.getChains()) {
                 File bFile = new File(dir, Integer.toString(container.getChains().indexOf(ch)) + ".chain");
@@ -128,11 +132,12 @@ public class Main {
             File xFile = new File(args[0] + ".xml");
             xFile.delete();
 
-            List<Object> bindings = new Reflections(
+            Reflections reflections = new Reflections(
                     new ConfigurationBuilder()
                     .forPackages("c1c/v8fs/jaxb/bindings")
-                    .setScanners(new ResourcesScanner())
-            ).getResources(
+                    .setScanners(new ResourcesScanner()));
+
+            List<Object> bindings = reflections.getResources(
                     (nm) -> (nm != null ? nm.matches(".+-bindings\\.xml") : false)
             ).stream()
                     .map((nm) -> Resources.getResource(nm))
@@ -144,15 +149,6 @@ public class Main {
             Map<String, Object> properties = new HashMap<>();
             properties.put(JAXBContextProperties.OXM_METADATA_SOURCE, bindingMap);
 
-//            new FileReader(bndPath + "attributes-bindings.xml");
-//            new FileReader(bndPath + "chain-bindings.xml");
-//            new FileReader(bndPath + "chunk-bindings.xml");
-//            new FileReader(bndPath + "chunk-header-bindings.xml");
-//            new FileReader(bndPath + "container-bindings.xml");
-//            new FileReader(bndPath + "container-header-bindings.xml");
-//            new FileReader(bndPath + "file-bindings.xml");
-//            new FileReader(bndPath + "index-bindings.xml");
-//            new FileReader(bndPath + "index-entry-bindings.xml");
             JAXBContext context = JAXBContextFactory.createContext(
                     new Class[]{
                         Container.class,
@@ -167,19 +163,68 @@ public class Main {
                     }, properties
             );
 
+            List<Object> bindingsSep = reflections.getResources(
+                    (nm) -> (nm != null ? nm.matches(".+-bindings-sep\\.xml") : false)
+            ).stream()
+                    .map((nm) -> Resources.getResource(nm))
+                    .collect(Collectors.toList());
+
+            Map<String, Object> bindingMapSep = new HashMap<>();
+            bindingMapSep.put("c1c.v8fs", bindingsSep);
+
+            Map<String, Object> propertiesSep = new HashMap<>();
+            propertiesSep.put(JAXBContextProperties.OXM_METADATA_SOURCE, bindingMapSep);
+
+            JAXBContext dataContext = JAXBContextFactory.createContext(
+                    new Class[]{
+                        Chunk.class
+                    }, propertiesSep
+            );
+
             Marshaller marsh = context.createMarshaller();
             marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            Marshaller marshData = dataContext.createMarshaller();
+            marshData.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
             marsh.marshal(container, xFile);
+
             final String arg0 = args[0];
-//            context.generateSchema(new SchemaOutputResolver() {
-//                @Override
-//                public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-//                    File schFile = new File(arg0 + ".xsd");
-//                    StreamResult result = new StreamResult(schFile);
-//                    result.setSystemId(schFile.toURI().toURL().toString());
-//                    return result;
-//                }
-//            });
+
+            File dataDir = new File(arg0 + ".data/");
+            dataDir.mkdirs();
+            for (File fl : dataDir.listFiles()) {
+                fl.delete();
+            }
+
+            for (Chain chain : container.getChains()) {
+                for (Chunk chunk : chain.getChunks()) {
+                    File chunkFile = new File(chunk.getDataFileName());
+                    marshData.marshal(chunk, chunkFile);
+                }
+            }
+
+            for (c1c.v8fs.File fl : container.getFiles().values()) {
+                Container cont = fl.getChild();
+                if (cont != null) {
+                    for (Chain chain : cont.getChains()) {
+                        for (Chunk chunk : chain.getChunks()) {
+                            File chunkFile = new File(chunk.getDataFileName());
+                            marshData.marshal(chunk, chunkFile);
+                        }
+                    }
+                }
+            }
+
+            context.generateSchema(new SchemaOutputResolver() {
+                @Override
+                public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+                    File schFile = new File(arg0 + ".xsd");
+                    StreamResult result = new StreamResult(schFile);
+                    result.setSystemId(schFile.toURI().toURL().toString());
+                    return result;
+                }
+            });
         }
     }
 

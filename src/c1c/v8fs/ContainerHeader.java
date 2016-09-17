@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import com.google.common.primitives.*;
+import java.util.HashMap;
 
 /**
  * Container header
@@ -27,6 +28,7 @@ public class ContainerHeader implements Bufferable {
     private long defaultChunkSize;
     private long reservedMaybeFilesCount;
     private long reservedUnknown;
+    private HashMap<String, Object> containerContext;
 
     @Override
     public void writeToBuffer(ByteBuffer buffer) {

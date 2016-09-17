@@ -6,6 +6,7 @@
 package c1c.v8fs;
 
 import java.nio.ByteBuffer;
+import java.util.HashMap;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class File implements Bufferable {
     private Attributes attributes;
     private Chain content;
     private Container child;
+    private HashMap<String, Object> containerContext;
 
     public void setAttributes(Attributes val) {
         this.name = val.getName();
@@ -49,7 +51,7 @@ public class File implements Bufferable {
         }
         Container cont = null;
         try {
-            cont = new Container();
+            cont = new Container(containerContext, getName());
             cont.readFromBuffer(ByteBuffer.wrap(data));
         } catch (Exception ex) {
             cont = null;

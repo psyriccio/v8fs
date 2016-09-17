@@ -3,7 +3,7 @@
 <xml-bindings
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xmlns='http://www.eclipse.org/eclipselink/xsds/persistence/oxm'
-    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm file:/home/psyriccio/v8fs/src/jaxb/bindings/eclipselink_oxm_2_4.xsd'>
+    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm ./eclipselink_oxm_2_4.xsd'>
 
     <java-types>
 
@@ -12,6 +12,7 @@
                 <xml-elements java-attribute="entries" >
                     <xml-element name="entry" />
                 </xml-elements>
+                <xml-transient java-attribute="containerContext" />
             </java-attributes>
         </java-type>
 

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
@@ -30,12 +31,10 @@ import lombok.Singular;
 public class Chain implements Bufferable {
 
     private static int nextID = 0;
-
     private String id;
-
     private long address;
-
     private @Singular List<Chunk> chunks;
+    private HashMap<String, Object> containerContext;
 
     private void setID() {
         this.id = Integer.toHexString(++nextID);
@@ -51,13 +50,13 @@ public class Chain implements Bufferable {
         int blockSize = data.length;
         while (buf.hasRemaining()) {
             if (chunkSize <= buf.remaining()) {
-                Chunk chunk = new Chunk(buf.array(), buf.remaining(), false);
+                Chunk chunk = new Chunk(containerContext, buf.array(), buf.remaining(), false);
                 chunks.add(chunk);
                 break;
             } else {
                 byte[] chd = new byte[chunkSize];
                 buf.get(chd);
-                Chunk chunk = new Chunk(chd, blockSize, buf.hasRemaining());
+                Chunk chunk = new Chunk(containerContext, chd, blockSize, buf.hasRemaining());
                 chunks.add(chunk);
             }
         }
@@ -100,6 +99,7 @@ public class Chain implements Bufferable {
         address = buffer.position();
         while (next) {
             Chunk chunk = new Chunk();
+            chunk.setContainerContext(containerContext);
             chunk.readFromBuffer(buffer);
             chunks.add(chunk);
             next = chunk.getHeader().isNextChunkPresent();

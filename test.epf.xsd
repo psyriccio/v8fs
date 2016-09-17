@@ -1,36 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <xsd:complexType name="file">
-      <xsd:sequence>
-         <xsd:element name="container" type="container" minOccurs="0"/>
-      </xsd:sequence>
-      <xsd:attribute name="name" type="xsd:ID"/>
-      <xsd:attribute name="creationDate" type="xsd:dateTime"/>
-      <xsd:attribute name="modifyDate" type="xsd:dateTime"/>
-      <xsd:attribute name="reserved" type="xsd:long" use="required"/>
-      <xsd:attribute name="name" type="xsd:string"/>
-      <xsd:attribute name="chain" type="xsd:IDREF"/>
-      <xsd:attribute name="chain" type="xsd:IDREF"/>
-   </xsd:complexType>
-   <xsd:complexType name="chain">
-      <xsd:sequence>
-         <xsd:choice maxOccurs="unbounded">
-            <xsd:element name="chunk" type="chunk" minOccurs="0"/>
-         </xsd:choice>
-      </xsd:sequence>
-      <xsd:attribute name="id" type="xsd:ID"/>
-      <xsd:attribute name="address" type="xsd:string"/>
-   </xsd:complexType>
-   <xsd:complexType name="chunk">
-      <xsd:sequence>
-         <xsd:element name="data" type="dataAttayAdaptedList" minOccurs="0"/>
-      </xsd:sequence>
-      <xsd:attribute name="id" type="xsd:ID"/>
-      <xsd:attribute name="blockSize" type="xsd:long" use="required"/>
-      <xsd:attribute name="thisChunkSize" type="xsd:long" use="required"/>
-      <xsd:attribute name="nextChunkPresent" type="xsd:boolean" use="required"/>
-      <xsd:attribute name="nextChunkAddress" type="xsd:string"/>
-   </xsd:complexType>
    <xsd:complexType name="attributes">
       <xsd:sequence/>
       <xsd:attribute name="creationDate" type="xsd:dateTime"/>
@@ -59,12 +28,40 @@
       <xsd:attribute name="reservedMaybeFilesCount" type="xsd:long" use="required"/>
       <xsd:attribute name="reservedUnknown" type="xsd:long" use="required"/>
    </xsd:complexType>
+   <xsd:complexType name="chain">
+      <xsd:sequence>
+         <xsd:choice maxOccurs="unbounded">
+            <xsd:element name="chunk" type="chunk" minOccurs="0"/>
+         </xsd:choice>
+      </xsd:sequence>
+      <xsd:attribute name="id" type="xsd:ID"/>
+      <xsd:attribute name="address" type="xsd:string"/>
+   </xsd:complexType>
    <xsd:complexType name="containerHeader">
       <xsd:sequence/>
       <xsd:attribute name="firstFreeChunkAddress" type="xsd:long" use="required"/>
       <xsd:attribute name="defaultChunkSize" type="xsd:long" use="required"/>
       <xsd:attribute name="reservedMaybeFilesCount" type="xsd:long" use="required"/>
       <xsd:attribute name="reservedUnknown" type="xsd:long" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="chunkHeader">
+      <xsd:sequence/>
+      <xsd:attribute name="blockSize" type="xsd:long" use="required"/>
+      <xsd:attribute name="thisChunkSize" type="xsd:long" use="required"/>
+      <xsd:attribute name="nextChunkAddress" type="xsd:string"/>
+      <xsd:attribute name="nextChunkPresent" type="xsd:boolean" use="required"/>
+   </xsd:complexType>
+   <xsd:complexType name="file">
+      <xsd:sequence>
+         <xsd:element name="container" type="container" minOccurs="0"/>
+      </xsd:sequence>
+      <xsd:attribute name="name" type="xsd:ID"/>
+      <xsd:attribute name="creationDate" type="xsd:dateTime"/>
+      <xsd:attribute name="modifyDate" type="xsd:dateTime"/>
+      <xsd:attribute name="reserved" type="xsd:long" use="required"/>
+      <xsd:attribute name="name" type="xsd:string"/>
+      <xsd:attribute name="chain" type="xsd:IDREF"/>
+      <xsd:attribute name="chain" type="xsd:IDREF"/>
    </xsd:complexType>
    <xsd:complexType name="index">
       <xsd:sequence>
@@ -73,12 +70,20 @@
          </xsd:choice>
       </xsd:sequence>
    </xsd:complexType>
-   <xsd:complexType name="chunkHeader">
-      <xsd:sequence/>
+   <xsd:complexType name="chunk">
+      <xsd:sequence>
+         <xsd:element name="data" minOccurs="0">
+            <xsd:complexType>
+               <xsd:sequence/>
+               <xsd:attribute name="file" type="xsd:string"/>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="id" type="xsd:ID"/>
       <xsd:attribute name="blockSize" type="xsd:long" use="required"/>
       <xsd:attribute name="thisChunkSize" type="xsd:long" use="required"/>
-      <xsd:attribute name="nextChunkPresent" type="xsd:boolean" use="required"/>
       <xsd:attribute name="nextChunkAddress" type="xsd:string"/>
+      <xsd:attribute name="nextChunkPresent" type="xsd:boolean" use="required"/>
    </xsd:complexType>
    <xsd:complexType name="fileAdaptedMap">
       <xsd:sequence>
@@ -107,16 +112,5 @@
       <xsd:sequence/>
       <xsd:attribute name="chain" type="xsd:IDREF"/>
    </xsd:complexType>
-   <xsd:complexType name="dataAttayAdaptedList">
-      <xsd:sequence>
-         <xsd:any processContents="skip" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
-      </xsd:sequence>
-      <xsd:attribute name="id" type="xsd:ID"/>
-   </xsd:complexType>
-   <xsd:element name="file" type="file"/>
-   <xsd:element name="chain" type="chain"/>
    <xsd:element name="v8fs" type="container"/>
-   <xsd:simpleType name="dataArrayAdaptedItem">
-      <xsd:restriction base="xsd:base64Binary"/>
-   </xsd:simpleType>
 </xsd:schema>

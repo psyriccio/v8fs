@@ -8,6 +8,7 @@ package c1c.v8fs;
 import com.google.common.primitives.UnsignedInteger;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.util.HashMap;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class ChunkHeader implements Bufferable {
     private long thisChunkSize;
     private long nextChunkAddress;
     private boolean nextChunkPresent;
+    private HashMap<String, Object> containerContext;
 
     private String get8Chars(ByteBuffer buf) {
         String res = "";

@@ -7,6 +7,7 @@ package c1c.v8fs;
 
 import com.google.common.primitives.UnsignedInteger;
 import java.nio.ByteBuffer;
+import java.util.HashMap;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class IndexEntry implements Bufferable {
     private long attributesAddress;
     private long contentAddress;
     private long reserved;
+    private HashMap<String, Object> containerContext;
 
     @Override
     public void writeToBuffer(ByteBuffer buffer) {

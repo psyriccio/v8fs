@@ -6,15 +6,19 @@
     xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm ./eclipselink_oxm_2_4.xsd'>
 
     <java-types>
-        <java-type name="c1c.v8fs.File" xml-accessor-type="FIELD">
+
+        <java-type name="c1c.v8fs.Chunk" xml-accessor-type="FIELD">
+            <xml-root-element name="v8fs-data-chunk" />
             <java-attributes>
-                <xml-attribute java-attribute="name" name="name" xml-id="true" />
-                <xml-element java-attribute="attributes" name="attributes" xml-path="." />
-                <xml-attribute java-attribute="content" name="chain" xml-idref="true" />
-                <xml-element java-attribute="child" name="container" />
+                <xml-attribute java-attribute="id" name="id" xml-id="true" />
+                <xml-transient java-attribute="header" />
+                <xml-element java-attribute="data" name="data">
+                    <xml-java-type-adapter value="c1c.v8fs.jaxb.DataArrayAdapter" />
+                </xml-element>
                 <xml-transient java-attribute="containerContext" />
             </java-attributes>
         </java-type>
+
     </java-types>
 
 </xml-bindings>

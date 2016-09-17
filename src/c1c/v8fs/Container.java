@@ -31,35 +31,49 @@ public class Container implements Bufferable {
     private Index index;
     private HashMap<String, File> files;
     private HashMap<Long, Chain> chainIndex;
+    private HashMap<String, Object> containerContext = new HashMap<>();
+
+    public Container(HashMap<String, Object> parentContext, String suffix) {
+        containerContext = (HashMap<String, Object>) parentContext.clone();
+        String newSuffix = (String) containerContext.getOrDefault("Suffix", "");
+        if (!newSuffix.isEmpty()) {
+            newSuffix += ".";
+        }
+        newSuffix += suffix;
+        containerContext.put("Suffix", newSuffix);
+    }
 
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         header.writeToBuffer(buffer);
-        chains.stream().forEach((block) -> {
-            block.writeToBuffer(buffer);
+        chains.stream().forEach((chain) -> {
+            chain.writeToBuffer(buffer);
         });
     }
 
     @Override
     public void readFromBuffer(ByteBuffer buffer) {
         header = new ContainerHeader();
+        header.setContainerContext(containerContext);
         header.readFromBuffer(buffer);
         chains = new ArrayList<>();
         index = null;
         chainIndex = new HashMap<>();
         while (buffer.hasRemaining()) {
-            Chain block = new Chain();
-            block.readFromBuffer(buffer);
-            chains.add(block);
-            chainIndex.put(block.getAddress(), block);
+            Chain chain = new Chain();
+            chain.setContainerContext(containerContext);
+            chain.readFromBuffer(buffer);
+            chains.add(chain);
+            chainIndex.put(chain.getAddress(), chain);
             if (index == null) {
                 index = new Index();
-                index.readFromBuffer(ByteBuffer.wrap(block.getData()));
+                index.readFromBuffer(ByteBuffer.wrap(chain.getData()));
             }
         }
         files = new HashMap<>();
-        for (IndexEntry idx : index.getEntries()) {
+        index.getEntries().stream().map((idx) -> {
             Attributes attr = new Attributes();
+            attr.setContainerContext(containerContext);
             Chain attrChain = chainIndex.get(
                     idx.getAttributesAddress()
             );
@@ -71,11 +85,16 @@ public class Container implements Bufferable {
             }
             Chain content = chainIndex.get(idx.getContentAddress());
             File file = new File();
+            file.setContainerContext(containerContext);
             file.setAttributes(attr);
             file.setContent(content);
+            return file;
+        }).map((file) -> {
             file.inspectContent();
+            return file;
+        }).forEach((file) -> {
             files.put(file.getAttributes().getName(), file);
-        }
+        });
     }
 
 }

@@ -3,7 +3,7 @@
 <xml-bindings
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
     xmlns='http://www.eclipse.org/eclipselink/xsds/persistence/oxm'
-    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm file:/home/psyriccio/v8fs/src/jaxb/bindings/eclipselink_oxm_2_4.xsd'>
+    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm ./eclipselink_oxm_2_4.xsd'>
 
     <java-types>
 
@@ -13,6 +13,7 @@
                 <xml-attribute java-attribute="defaultChunkSize" name="defaultChunkSize" />
                 <xml-attribute java-attribute="reservedMaybeFilesCount" name="reservedMaybeFilesCount" />
                 <xml-attribute java-attribute="reservedUnknown" name="reservedUnknown" />
+                <xml-transient java-attribute="containerContext" />
             </java-attributes>
         </java-type>
 

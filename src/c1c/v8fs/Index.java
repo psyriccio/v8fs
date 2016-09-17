@@ -7,6 +7,7 @@ package c1c.v8fs;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,7 @@ import lombok.Singular;
 public class Index implements Bufferable {
 
     private @Singular List<IndexEntry> entries;
+    private HashMap<String, Object> containerContext;
 
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
@@ -40,6 +42,7 @@ public class Index implements Bufferable {
         entries = new ArrayList<>();
         while (buffer.hasRemaining()) {
             IndexEntry ent = new IndexEntry();
+            ent.setContainerContext(containerContext);
             ent.readFromBuffer(buffer);
             if (ent.getAttributesAddress() != 0L && ent.getContentAddress() != 0L) {
                 entries.add(ent);

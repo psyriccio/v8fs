@@ -6,6 +6,8 @@
 package c1c.v8fs;
 
 import com.google.common.collect.Lists;
+import com.google.common.escape.CharEscaper;
+import com.google.common.escape.CharEscaperBuilder;
 import com.google.common.primitives.Bytes;
 import com.google.common.primitives.UnsignedInteger;
 import com.google.common.primitives.UnsignedLong;
@@ -15,6 +17,7 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,6 +39,7 @@ public class Attributes implements Bufferable {
     private long reserved;
     private String name;
     private Chain chain;
+    private HashMap<String, Object> containerContext;
 
     private byte[] codeDateTime(Date dateTime) {
         Calendar cal = Calendar.getInstance();
@@ -92,6 +96,7 @@ public class Attributes implements Bufferable {
             }
             skip = !skip;
         }
+        name = name.replaceAll("[\\x00-\\x1F]", "");
     }
 
 }
