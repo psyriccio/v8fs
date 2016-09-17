@@ -2,9 +2,9 @@
 
 Библиотека находится в стадии активной разработки.
 
-Тестовая декомпиляция в XML: [test.epf.xml](./test.epf.xml)
+Тестовая декомпиляция в XML: [test.epf.xml](./test-data/test.epf.xml)
 <br>
-XML schema: [test.epf.xsd](./test.epf.xsd)
+XML schema: [test.epf.xsd](./test-data/test.epf.xsd)
 
 
 Лицензия: [LGPLv3](./LICENSE.TXT)
