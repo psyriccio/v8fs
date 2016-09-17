@@ -15,8 +15,8 @@
                     <xml-element name="chain"/>
                 </xml-elements>
                 <xml-element java-attribute="index" name="index" />
-                <xml-java-type-adapter value="c1c.v8fs.FileMapAdapter" java-attribute="files" />
-                <xml-java-type-adapter value="c1c.v8fs.ChainIndexAdapter" java-attribute="chainIndex" />
+                <xml-java-type-adapter value="c1c.v8fs.jaxb.FileMapAdapter" java-attribute="files" />
+                <xml-java-type-adapter value="c1c.v8fs.jaxb.ChainIndexAdapter" java-attribute="chainIndex" />
             </java-attributes>
         </java-type>
 

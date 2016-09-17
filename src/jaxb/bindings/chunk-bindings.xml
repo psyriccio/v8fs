@@ -11,7 +11,7 @@
             <java-attributes>
                 <xml-attribute java-attribute="id" name="id" xml-id="true" />
                 <xml-element java-attribute="header" name="header" xml-path="." />
-                <xml-java-type-adapter value="c1c.v8fs.DataArrayAdapter" java-attribute="data" />
+                <xml-java-type-adapter value="c1c.v8fs.jaxb.DataArrayAdapter" java-attribute="data" />
             </java-attributes>
         </java-type>
 

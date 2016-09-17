@@ -14,7 +14,7 @@
                     <xml-element name="chunk" />
                 </xml-elements>
                 <xml-attribute java-attribute="address" name="address">
-                    <xml-java-type-adapter value="c1c.v8fs.AddressHexAdapter" />
+                    <xml-java-type-adapter value="c1c.v8fs.jaxb.AddressHexAdapter" />
                 </xml-attribute>
             </java-attributes>
         </java-type>

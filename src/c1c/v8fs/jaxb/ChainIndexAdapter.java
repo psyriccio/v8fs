@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package c1c.v8fs;
+package c1c.v8fs.jaxb;
 
+import c1c.v8fs.Chain;
+import c1c.v8fs.Main;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -13,7 +13,7 @@
                 <xml-attribute java-attribute="thisChunkSize" name="thisChunkSize" />
                 <xml-attribute java-attribute="nextChunkPresent" name="nextChunkPresent" />
                 <xml-attribute java-attribute="nextChunkAddress" name="nextChunkAddress" >
-                    <xml-java-type-adapter value="c1c.v8fs.AddressHexAdapter" />
+                    <xml-java-type-adapter value="c1c.v8fs.jaxb.AddressHexAdapter" />
                 </xml-attribute>
             </java-attributes>
         </java-type>
