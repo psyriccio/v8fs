@@ -6,8 +6,6 @@
 package c1c.v8fs;
 
 import com.google.common.collect.Lists;
-import com.google.common.escape.CharEscaper;
-import com.google.common.escape.CharEscaperBuilder;
 import com.google.common.primitives.Bytes;
 import com.google.common.primitives.UnsignedInteger;
 import com.google.common.primitives.UnsignedLong;
