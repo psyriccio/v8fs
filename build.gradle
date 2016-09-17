@@ -1,15 +1,15 @@
 buildscript {
-  repositories { jcenter() }
-  dependencies {
-    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
-  }
-	repositories {
-		mavenCentral()
-	}
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+    repositories {
+        mavenCentral()
+    }
 }
 
 plugins {
-  id "com.github.johnrengelman.shadow" version "1.2.3"
+    id "com.github.johnrengelman.shadow" version "1.2.3"
 }
 
 ext.mainClass = 'c1c.v8fs.Main'
@@ -36,9 +36,9 @@ jar {
 }
 
 shadowJar {
-   dependencies {
-      exclude(dependency('com.google.android:android:.*'))
-      exclude(dependency('org.eclipse.swt.win32.win32:.*'))
+    dependencies {
+        exclude(dependency('com.google.android:android:.*'))
+        exclude(dependency('org.eclipse.swt.win32.win32:.*'))
     }
 }
 
@@ -53,6 +53,10 @@ dependencies {
     compile group: 'javax.mail', name: 'mail', version: '1.4.7'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+    // https://mvnrepository.com/artifact/org.reflections/reflections
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+    // https://mvnrepository.com/artifact/dom4j/dom4j
+    compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
     // https://mvnrepository.com/artifact/fr.faylixe/marklet
     //compile group: 'fr.faylixe', name: 'marklet', version: '1.0.5'
     compile fileTree(dir: 'lib').matching { include '*.jar'}

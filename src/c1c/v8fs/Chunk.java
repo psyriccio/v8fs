@@ -7,16 +7,9 @@ package c1c.v8fs;
 
 import com.google.common.primitives.UnsignedInteger;
 import java.nio.ByteBuffer;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  * A minimal piece of data in matadata containers
@@ -26,14 +19,13 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @Data
 @Builder
 @AllArgsConstructor
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Chunk implements Bufferable {
 
     private static int nextID = 0;
 
-    private @XmlID @XmlAttribute String id;
-    private @XmlPath(".") @XmlElement ChunkHeader header;
-    private @XmlJavaTypeAdapter(DataArrayAdapter.class) byte[] data;
+    private String id;
+    private ChunkHeader header;
+    private byte[] data;
 
     private void setID() {
         this.id = Integer.toHexString(++nextID);

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xml-bindings
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.eclipse.org/eclipselink/xsds/persistence/oxm'
+    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm file:/home/psyriccio/v8fs/src/jaxb/bindings/eclipselink_oxm_2_4.xsd'>
+
+    <java-types>
+
+        <java-type name="c1c.v8fs.Index" xml-accessor-type="FIELD">
+            <java-attributes>
+                <xml-elements java-attribute="entries" >
+                    <xml-element name="entry" />
+                </xml-elements>
+            </java-attributes>
+        </java-type>
+
+    </java-types>
+
+</xml-bindings>

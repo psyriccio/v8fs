@@ -6,18 +6,10 @@
 package c1c.v8fs;
 
 import java.nio.ByteBuffer;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.eclipse.persistence.oxm.annotations.XmlPath;
 
 /**
  * Represents logical file object. Contains two chains: attributes and data
@@ -28,14 +20,12 @@ import org.eclipse.persistence.oxm.annotations.XmlPath;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "file")
 public class File implements Bufferable {
 
-    private @XmlID @XmlAttribute String name;
-    private @XmlPath(".") @XmlElement Attributes attributes;
-    private @XmlIDREF @XmlAttribute(name = "chain") Chain content;
-    private @XmlElement(name = "container") Container child;
+    private String name;
+    private Attributes attributes;
+    private Chain content;
+    private Container child;
 
     public void setAttributes(Attributes val) {
         this.name = val.getName();

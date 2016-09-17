@@ -15,10 +15,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,14 +29,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Attributes implements Bufferable {
 
-    private @XmlAttribute Date creationDate;
-    private @XmlAttribute Date modifyDate;
-    private @XmlAttribute long reserved;
-    private @XmlAttribute String name;
-    private @XmlIDREF @XmlAttribute(name = "chain") Chain chain;
+    private Date creationDate;
+    private Date modifyDate;
+    private long reserved;
+    private String name;
+    private Chain chain;
 
     private byte[] codeDateTime(Date dateTime) {
         Calendar cal = Calendar.getInstance();

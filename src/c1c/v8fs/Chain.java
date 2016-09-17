@@ -14,14 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,24 +27,20 @@ import lombok.Singular;
 @Data
 @Builder
 @AllArgsConstructor
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
 public class Chain implements Bufferable {
 
     private static int nextID = 0;
 
-    private @XmlID @XmlAttribute String id;
+    private String id;
 
-    private @XmlTransient long address;
+    private long address;
 
-    private @XmlElements(value = @XmlElement(name = "chunk")) @Singular List<Chunk> chunks;
+    private @Singular List<Chunk> chunks;
 
-    @XmlAttribute(name = "address")
     private String getAddressXML() {
         return Main.to8Digits(Long.toHexString(address));
     }
 
-    @XmlAttribute(name = "address")
     private void setAddressXML(String val) {
         this.address = Long.parseUnsignedLong(val, 16);
     }

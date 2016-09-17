@@ -7,10 +7,6 @@ package c1c.v8fs;
 
 import com.google.common.primitives.UnsignedInteger;
 import java.nio.ByteBuffer;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,39 +22,32 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlAccessorType(XmlAccessType.FIELD)
 public class IndexEntry implements Bufferable {
 
-    private @XmlTransient long attributesAddress;
-    private @XmlTransient long contentAddress;
-    private @XmlTransient long reserved;
+    private long attributesAddress;
+    private long contentAddress;
+    private long reserved;
 
-    @XmlAttribute(name = "attributesAddress")
     public String getAttributesAddressXML() {
         return Main.to8Digits(Long.toHexString(this.attributesAddress));
     }
 
-    @XmlAttribute(name = "attributesAddress")
     public void setAttributesAddressXML(String val) {
         this.attributesAddress = Long.parseUnsignedLong(val, 16);
     }
 
-    @XmlAttribute(name = "contentAddress")
     public String getContentAddressXML() {
         return Main.to8Digits(Long.toHexString(this.contentAddress));
     }
 
-    @XmlAttribute(name = "contentAddress")
     public void setContentAddressXML(String val) {
         this.contentAddress = Long.parseUnsignedLong(val, 16);
     }
 
-    @XmlAttribute(name = "reserved")
     public String getReservedXML() {
         return Main.to8Digits(Long.toHexString(this.reserved));
     }
 
-    @XmlAttribute(name = "reserved")
     public void setReservedXML(String val) {
         this.reserved = Long.parseUnsignedLong(val, 16);
     }

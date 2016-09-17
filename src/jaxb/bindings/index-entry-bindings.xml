@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xml-bindings
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.eclipse.org/eclipselink/xsds/persistence/oxm'
+    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm file:/home/psyriccio/v8fs/src/jaxb/bindings/eclipselink_oxm_2_4.xsd'>
+
+    <java-types>
+
+        <java-type name="c1c.v8fs.IndexEntry" xml-accessor-type="FIELD">
+            <java-attributes>
+                <xml-attribute java-attribute="attributesAddress" name="attributesAddress" type="java.lang.String" xml-accessor-type="PROPERTY">
+                    <xml-access-methods get-method="getAttributesAddressXML" set-method="setAttributesAddressXML" />
+                </xml-attribute>
+                <xml-attribute java-attribute="contentAddress" name="contentAddress" type="java.lang.String" xml-accessor-type="PROPERTY">
+                    <xml-access-methods get-method="getContentAddressXML" set-method="setContentAddressXML" />
+                </xml-attribute>
+                <xml-attribute java-attribute="reserved" name="reserved" type="java.lang.String" xml-accessor-type="PROPERTY">
+                    <xml-access-methods get-method="getReservedXML" set-method="setReservedXML" />
+                </xml-attribute>
+            </java-attributes>
+        </java-type>
+
+    </java-types>
+
+</xml-bindings>

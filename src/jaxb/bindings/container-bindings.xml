@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xml-bindings
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.eclipse.org/eclipselink/xsds/persistence/oxm'
+    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm file:/home/psyriccio/v8fs/src/jaxb/bindings/eclipselink_oxm_2_4.xsd'>
+
+    <java-types>
+
+        <java-type name="c1c.v8fs.Container" xml-accessor-type="FIELD">
+            <xml-root-element name="v8fs" />
+            <java-attributes>
+                <xml-element java-attribute="header" name="header" xml-path="." />
+                <xml-elements java-attribute="chains">
+                    <xml-element name="chain"/>
+                </xml-elements>
+                <xml-element java-attribute="index" name="index" />
+                <xml-java-type-adapter value="c1c.v8fs.FileMapAdapter" java-attribute="files" />
+                <xml-java-type-adapter value="c1c.v8fs.ChainIndexAdapter" java-attribute="chainIndex" />
+            </java-attributes>
+        </java-type>
+
+    </java-types>
+
+</xml-bindings>

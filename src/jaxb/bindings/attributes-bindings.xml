@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xml-bindings
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.eclipse.org/eclipselink/xsds/persistence/oxm'
+    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm file:/home/psyriccio/v8fs/src/jaxb/bindings/eclipselink_oxm_2_4.xsd'>
+
+    <java-types>
+
+        <java-type name="c1c.v8fs.Attributes" xml-accessor-type="FIELD">
+            <java-attributes>
+                <xml-attribute java-attribute="creationDate" name="creationDate" />
+                <xml-attribute java-attribute="modifyDate" name="modifyDate" />
+                <xml-attribute java-attribute="reserved" name="reserved" />
+                <xml-attribute java-attribute="name" name="name" />
+                <xml-attribute java-attribute="chain" name="chain" xml-idref="true" />
+            </java-attributes>
+        </java-type>
+    </java-types>
+
+
+</xml-bindings>
+
+<!--private @XmlAttribute Date creationDate;
+    private @XmlAttribute Date modifyDate;
+    private @XmlAttribute long reserved;
+    private @XmlAttribute String name;
+    private @XmlIDREF @XmlAttribute(name = "chain") Chain chain;
+-->

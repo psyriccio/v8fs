@@ -1,10 +1,14 @@
 package c1c.v8fs;
 
 import com.google.common.io.Files;
+import com.google.common.io.Resources;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -12,11 +16,20 @@ import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
+import org.eclipse.persistence.jaxb.JAXBContextProperties;
+import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.util.ConfigurationBuilder;
 
 /**
  * Testing class (unit tests is coming soon)
  */
 public class Main {
+
+    public static String _dbgFlt(String str) {
+        System.out.println("_dbgFlt: " + str);
+        return str;
+    }
 
     /**
      * Utility method. Extends string hex-number values to 8 digits with leading
@@ -117,6 +130,32 @@ public class Main {
             printContent(container, 1);
             File xFile = new File(args[0] + ".xml");
             xFile.delete();
+
+            List<Object> bindings = new Reflections(
+                    new ConfigurationBuilder()
+                    .forPackages("jaxb/bindings")
+                    .setScanners(new ResourcesScanner())
+            ).getResources(
+                    (nm) -> (nm != null ? nm.matches(".+-bindings\\.xml") : false)
+            ).stream()
+                    .map((nm) -> Resources.getResource(nm))
+                    .collect(Collectors.toList());
+
+            Map<String, Object> bindingMap = new HashMap<>();
+            bindingMap.put("c1c.v8fs", bindings);
+
+            Map<String, Object> properties = new HashMap<>();
+            properties.put(JAXBContextProperties.OXM_METADATA_SOURCE, bindingMap);
+
+//            new FileReader(bndPath + "attributes-bindings.xml");
+//            new FileReader(bndPath + "chain-bindings.xml");
+//            new FileReader(bndPath + "chunk-bindings.xml");
+//            new FileReader(bndPath + "chunk-header-bindings.xml");
+//            new FileReader(bndPath + "container-bindings.xml");
+//            new FileReader(bndPath + "container-header-bindings.xml");
+//            new FileReader(bndPath + "file-bindings.xml");
+//            new FileReader(bndPath + "index-bindings.xml");
+//            new FileReader(bndPath + "index-entry-bindings.xml");
             JAXBContext context = JAXBContextFactory.createContext(
                     new Class[]{
                         Container.class,
@@ -125,25 +164,25 @@ public class Main {
                         Chunk.class,
                         ChunkHeader.class,
                         Attributes.class,
-                        File.class,
+                        c1c.v8fs.File.class,
                         Index.class,
                         IndexEntry.class
-                    }, new HashMap<String, Object>()
+                    }, properties
             );
 
             Marshaller marsh = context.createMarshaller();
             marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marsh.marshal(container, xFile);
             final String arg0 = args[0];
-            context.generateSchema(new SchemaOutputResolver() {
-                @Override
-                public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-                    File schFile = new File(arg0 + ".xsd");
-                    StreamResult result = new StreamResult(schFile);
-                    result.setSystemId(schFile.toURI().toURL().toString());
-                    return result;
-                }
-            });
+//            context.generateSchema(new SchemaOutputResolver() {
+//                @Override
+//                public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+//                    File schFile = new File(arg0 + ".xsd");
+//                    StreamResult result = new StreamResult(schFile);
+//                    result.setSystemId(schFile.toURI().toURL().toString());
+//                    return result;
+//                }
+//            });
         }
     }
 

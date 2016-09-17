@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xml-bindings
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.eclipse.org/eclipselink/xsds/persistence/oxm'
+    xsi:schemaLocation='http://www.eclipse.org/eclipselink/xsds/persistence/oxm file:/home/psyriccio/v8fs/src/jaxb/bindings/eclipselink_oxm_2_4.xsd'>
+
+    <java-types>
+        <java-type name="c1c.v8fs.File" xml-accessor-type="FIELD">
+            <java-attributes>
+                <xml-attribute java-attribute="name" name="name" xml-id="true" />
+                <xml-element java-attribute="attributes" name="attributes" xml-path="." />
+                <xml-attribute java-attribute="content" name="chain" xml-idref="true" />
+                <xml-element java-attribute="child" name="container" />
+            </java-attributes>
+        </java-type>
+    </java-types>
+
+</xml-bindings>

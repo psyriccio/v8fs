@@ -8,10 +8,6 @@ package c1c.v8fs;
 import com.google.common.primitives.UnsignedInteger;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,20 +22,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlAccessorType(XmlAccessType.FIELD)
 public class ChunkHeader implements Bufferable {
 
-    private @XmlAttribute long blockSize;
-    private @XmlAttribute long thisChunkSize;
-    private @XmlTransient long nextChunkAddress;
-    private @XmlAttribute boolean nextChunkPresent;
+    private long blockSize;
+    private long thisChunkSize;
+    private long nextChunkAddress;
+    private boolean nextChunkPresent;
 
-    @XmlAttribute(name = "nextChunkAddress")
     public String getNextChunkAddressXML() {
         return Main.to8Digits(Long.toHexString(this.nextChunkAddress));
     }
 
-    @XmlAttribute(name = "nextChunkAddress")
     public void setNextChunkAddressXML(String val) {
         this.nextChunkAddress = Long.parseUnsignedLong(val, 16);
     }
