@@ -44,26 +44,26 @@ public class Attributes implements Bufferable {
     private byte[] codeDateTime(Date dateTime) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateTime);
+        BigInteger divCn = new BigInteger("10");
         long val = cal.getTimeInMillis();
         byte[] res = UnsignedLong.fromLongBits(val)
-                .bigIntegerValue().multiply(
-                        BigInteger.TEN.multiply(BigInteger.TEN).multiply(BigInteger.ONE.add(BigInteger.ONE))
-                ).toByteArray();
+                .bigIntegerValue().multiply(divCn).toByteArray();
         //ArrayUtils.reverse(res);
+        cal.add(cal.YEAR, 1969);
         return res;
     }
 
     private Date decodeDateTime(byte[] val) {
         byte[] arr = Arrays.copyOf(val, val.length);
+        BigInteger divCn = new BigInteger("10");
         //ArrayUtils.reverse(arr);
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(
                 UnsignedLong.valueOf(
-                        (new BigInteger(arr).divide(
-                                BigInteger.TEN.multiply(BigInteger.TEN).multiply(BigInteger.ONE.add(BigInteger.ONE))
-                        ))
+                        new BigInteger(arr).divide(divCn)
                 ).longValue()
         );
+        cal.add(cal.YEAR, -1969);
         return cal.getTime();
     }
 
