@@ -15,6 +15,7 @@ import c1c.v8fs.Index;
 import c1c.v8fs.IndexEntry;
 import com.google.common.io.Resources;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,10 @@ import java.util.stream.Collectors;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Result;
+import javax.xml.transform.stream.StreamResult;
 import lombok.Getter;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
 import org.eclipse.persistence.jaxb.JAXBContextProperties;
@@ -142,12 +146,24 @@ public class JAXBSerializer {
 
     }
 
+    protected void generateSchema(File dir, String name) throws IOException {
+        jaxbContext.generateSchema(new SchemaOutputResolver() {
+            @Override
+            public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+                File schFile = new File(dir, name + ".xsd");
+                StreamResult result = new StreamResult(schFile);
+                result.setSystemId(schFile.toURI().toURL().toString());
+                return result;
+            }
+        });
+    }
+
     protected void serializeMain(Container cont, File dir, String name) throws JAXBException {
         File xFile = new File(dir, name + ".xml");
         jaxbMarshaller.marshal(cont, xFile);
     }
 
-    public void serialize(Container cont, File baseDir) throws JAXBException {
+    public void serialize(Container cont, File baseDir) throws JAXBException, IOException {
 
         String name = (String) cont.getContainerContext().getOrDefault(
                 "FileName", UUID.randomUUID().toString());
@@ -155,10 +171,10 @@ public class JAXBSerializer {
 
         serializeMain(cont, dir, name);
         serializeData(cont, dir, name);
-
+        generateSchema(dir, name);
     }
 
-    public void serialize(Container cont, String baseDir) throws JAXBException {
+    public void serialize(Container cont, String baseDir) throws JAXBException, IOException {
         serialize(cont, new File(baseDir));
     }
 
