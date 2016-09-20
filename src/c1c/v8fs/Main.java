@@ -1,10 +1,8 @@
 package c1c.v8fs;
 
 import c1c.v8fs.jaxb.JAXBSerializer;
-import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import javax.xml.bind.JAXBException;
 
 /**
