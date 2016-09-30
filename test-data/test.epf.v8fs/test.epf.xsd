@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <xsd:complexType name="indexEntry">
+      <xsd:sequence/>
+      <xsd:attribute name="attributesAddress" type="xsd:string"/>
+      <xsd:attribute name="contentAddress" type="xsd:string"/>
+      <xsd:attribute name="reserved" type="xsd:string"/>
+   </xsd:complexType>
    <xsd:complexType name="attributes">
       <xsd:sequence/>
       <xsd:attribute name="creationDate" type="xsd:dateTime"/>
@@ -7,12 +13,6 @@
       <xsd:attribute name="reserved" type="xsd:long" use="required"/>
       <xsd:attribute name="name" type="xsd:string"/>
       <xsd:attribute name="chain" type="xsd:IDREF"/>
-   </xsd:complexType>
-   <xsd:complexType name="indexEntry">
-      <xsd:sequence/>
-      <xsd:attribute name="attributesAddress" type="xsd:string"/>
-      <xsd:attribute name="contentAddress" type="xsd:string"/>
-      <xsd:attribute name="reserved" type="xsd:string"/>
    </xsd:complexType>
    <xsd:complexType name="container">
       <xsd:sequence>
