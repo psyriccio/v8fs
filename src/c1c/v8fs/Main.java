@@ -1,8 +1,12 @@
 package c1c.v8fs;
 
+import c1c.v8fs.assemble.ContainerAssembler;
 import c1c.v8fs.jaxb.JAXBSerializer;
+import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
 import javax.xml.bind.JAXBException;
 
 /**
@@ -104,6 +108,17 @@ public class Main {
 
         jaxbSerializer.serialize(container, "test-data/");
 
+        ContainerAssembler.disassemble(container, new File("test-data/"), new File(args[0]).getName());
+        Container contAsm = ContainerAssembler.assemble(
+                new File("test-data/" + new File(args[0]).getName() + ".v8"), true);
+
+        ByteBuffer buf = ByteBuffer.allocate(1024*1024*30);
+        contAsm.writeToBuffer(buf);
+        buf.limit(buf.position());
+        int size = buf.position();
+        byte[] data = Arrays.copyOfRange(buf.array(), 0, size);
+        Files.write(data, new File(new File("test-data/"), "asm_" + new File(args[0]).getName()));
+        
         final String arg0 = args[0];
 
 //            context.generateSchema(new SchemaOutputResolver() {

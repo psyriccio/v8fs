@@ -40,7 +40,7 @@ public class ChunkHeader implements Bufferable {
     }
 
     private String intToHex(long i) {
-        String buf = UnsignedInteger.valueOf(i).toString(16);
+        String buf = UnsignedInteger.fromIntBits((int) i  & 0x7fffffff).toString(16) ; //.toString(16);
         while (buf.length() < 8) {
             buf = "0" + buf;
         }

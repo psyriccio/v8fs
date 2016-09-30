@@ -33,10 +33,10 @@ public class ContainerHeader implements Bufferable {
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         buffer
-                .putInt(Integer.reverseBytes(UnsignedInteger.valueOf(firstFreeChunkAddress).intValue()))
+                .putInt(Integer.reverseBytes(Integer.MAX_VALUE))
                 .putInt(Integer.reverseBytes(UnsignedInteger.valueOf(defaultChunkSize).intValue()))
                 .putInt(Integer.reverseBytes(UnsignedInteger.valueOf(reservedMaybeFilesCount).intValue()))
-                .putInt(Integer.reverseBytes(UnsignedInteger.valueOf(reservedUnknown).intValue()));
+                .putInt(Integer.reverseBytes(0));
     }
 
     @Override

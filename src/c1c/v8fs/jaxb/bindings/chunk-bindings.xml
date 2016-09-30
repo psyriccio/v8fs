@@ -24,6 +24,7 @@
                 </xml-attribute>
                 <xml-transient java-attribute="data" />
                 <xml-transient java-attribute="containerContext" />
+                <xml-transient java-attribute="nextChunk" /> 
             </java-attributes>
         </java-type>
 

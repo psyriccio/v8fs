@@ -6,6 +6,7 @@
 package c1c.v8fs;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 /**
  * Reading/Writing from/to buffer base feature interface
@@ -18,4 +19,12 @@ public interface Bufferable {
 
     public void readFromBuffer(ByteBuffer buffer);
 
+    default public byte[] asByteArray() {
+        ByteBuffer buf = ByteBuffer.allocate(1024*1024*30);
+        writeToBuffer(buf);
+        int size = buf.position();
+        buf.limit(size);
+        return Arrays.copyOfRange(buf.compact().slice().array(), 0, size);
+    }
+    
 }

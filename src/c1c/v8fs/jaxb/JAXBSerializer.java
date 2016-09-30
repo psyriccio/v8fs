@@ -15,6 +15,8 @@ import c1c.v8fs.Index;
 import c1c.v8fs.IndexEntry;
 import com.google.common.io.Resources;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -117,7 +119,7 @@ public class JAXBSerializer {
         return dir;
     }
 
-    protected void serializeData(Container cont, File dir, String name) throws JAXBException {
+    protected void serializeData(Container cont, File dir, String name) throws JAXBException, FileNotFoundException, IOException {
 
         File dataDir = new File(dir, name + ".data/");
         dataDir.mkdirs();
@@ -134,6 +136,22 @@ public class JAXBSerializer {
 
         for (c1c.v8fs.File fl : cont.getFiles().values()) {
             Container cnt = fl.getChild();
+            byte[] flContentInf = fl.getContent().getDataInflate();
+            if(flContentInf != null) {
+                File rawFileInf = new File(dir, fl.getName() + ".inf.raw");
+                try (FileOutputStream rawFileOutInf = new FileOutputStream(rawFileInf)) {
+                    rawFileOutInf.write(flContentInf);
+                    rawFileOutInf.flush();
+                }
+                
+            } else {
+                byte[] flContent = fl.getContent().getData();
+                File rawFile = new File(dir, fl.getName() + ".raw");
+                try (FileOutputStream rawFileOut = new FileOutputStream(rawFile)) {
+                    rawFileOut.write(flContent);
+                    rawFileOut.flush();
+                }
+            }
             if (cnt != null) {
                 for (Chain chain : cnt.getChains()) {
                     for (Chunk chunk : chain.getChunks()) {

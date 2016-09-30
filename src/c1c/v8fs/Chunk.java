@@ -28,7 +28,10 @@ public class Chunk implements Bufferable {
     private ChunkHeader header;
     private byte[] data;
     private HashMap<String, Object> containerContext;
-
+    private long address;
+    
+    private Chunk nextChunk;
+    
     private void setID() {
         this.id = Integer.toHexString(++nextID);
     }
@@ -66,6 +69,7 @@ public class Chunk implements Bufferable {
         } else {
             header.setNextChunkAddress(UnsignedInteger.MAX_VALUE.longValue());
         }
+        this.address = buffer.position();
         header.writeToBuffer(buffer);
         buffer.put(data);
     }

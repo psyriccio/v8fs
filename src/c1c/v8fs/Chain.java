@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
@@ -27,7 +26,6 @@ import lombok.Singular;
  */
 @Data
 @Builder
-@AllArgsConstructor
 public class Chain implements Bufferable {
 
     private static int nextID = 0;
@@ -42,31 +40,54 @@ public class Chain implements Bufferable {
 
     public Chain() {
         setID();
+        chunks = new ArrayList<>();
     }
 
     public Chain(byte[] data, int chunkSize) {
         setID();
+        chunks = new ArrayList<>();
         ByteBuffer buf = ByteBuffer.wrap(data);
         int blockSize = data.length;
+        Chunk lastChunk = null;
         while (buf.hasRemaining()) {
             if (chunkSize <= buf.remaining()) {
-                Chunk chunk = new Chunk(containerContext, buf.array(), buf.remaining(), false);
+                Chunk chunk = new Chunk(containerContext, buf.array(), blockSize + 6, false);
                 chunks.add(chunk);
+                if(lastChunk != null) {
+                    lastChunk.setNextChunk(chunk);
+                }
+                lastChunk = chunk;
                 break;
             } else {
                 byte[] chd = new byte[chunkSize];
-                buf.get(chd);
-                Chunk chunk = new Chunk(containerContext, chd, blockSize, buf.hasRemaining());
+                if(buf.remaining() >= chunkSize) {
+                    buf.get(chd);
+                } else {
+                    buf.get(chd, 0, buf.remaining());
+                }
+                Chunk chunk = new Chunk(containerContext, chd, blockSize + 6, buf.hasRemaining());
                 chunks.add(chunk);
+                if(lastChunk != null) {
+                    lastChunk.setNextChunk(chunk);
+                }
+                lastChunk = chunk;
             }
         }
     }
 
+    public Chain(String id, long address, List<Chunk> chunks, HashMap<String, Object> containerContext) {
+        this.id = id;
+        this.address = address;
+        this.chunks = chunks;
+        this.containerContext = containerContext;
+    }
+    
     public byte[] getData() {
         long length = chunks.get(0).getHeader().getBlockSize();
         byte[] res = new byte[(int) length];
         ByteBuffer buf = ByteBuffer.wrap(res);
-        for (Chunk chunk : chunks) {
+        Chunk chunk = chunks.stream().findFirst().orElse(null);
+        while (chunk != null) {
             byte[] chdata = chunk.getData();
             if (length >= chunk.getHeader().getThisChunkSize()) {
                 buf.put(chdata);
@@ -74,6 +95,7 @@ public class Chain implements Bufferable {
             } else {
                 buf.put(Arrays.copyOfRange(chdata, 0, (int) length));
             }
+            chunk = chunk.getNextChunk();
         };
         return res;
     }
@@ -84,7 +106,7 @@ public class Chain implements Bufferable {
         InflaterInputStream inf = new InflaterInputStream(in, new Inflater(true));
         return ByteStreams.toByteArray(inf);
     }
-
+    
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         chunks.stream().forEach((chunk) -> {
@@ -97,10 +119,16 @@ public class Chain implements Bufferable {
         chunks = new ArrayList<>();
         boolean next = true;
         address = buffer.position();
+        Chunk lastChunk = null;
         while (next) {
             Chunk chunk = new Chunk();
             chunk.setContainerContext(containerContext);
             chunk.readFromBuffer(buffer);
+            chunk.setNextChunk(null);
+            if(lastChunk != null) {
+                lastChunk.setNextChunk(chunk);
+            }
+            lastChunk = chunk;
             chunks.add(chunk);
             next = chunk.getHeader().isNextChunkPresent();
         }
