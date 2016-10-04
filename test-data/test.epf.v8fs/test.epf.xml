@@ -1,216 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <v8fs firstFreeChunkAddress="2147483647" defaultChunkSize="512" reservedMaybeFilesCount="8" reservedUnknown="0">
-   <chain id="1" address="00000010">
-      <chunk id="1" blockSize="96" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
-         <data file="test.epf.data/1.xml"/>
-         <address>0</address>
+   <chain id="26" address="00000000">
+      <chunk id="26" address="00000000" chainSize="96" thisChunkSize="0" nextChunkAddress="00000000" nextChunkPresent="false">
+         <data file="test.epf.data/26.xml"/>
       </chunk>
    </chain>
-   <chain id="2" address="0000022f">
-      <chunk id="2" blockSize="100" thisChunkSize="100" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="2" address="00000080">
+      <chunk id="2" address="00000080" chainSize="100" thisChunkSize="100" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/2.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="3" address="000002b2">
-      <chunk id="3" blockSize="5276" thisChunkSize="5276" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="3" address="000000e4">
+      <chunk id="3" address="000000e4" chainSize="5276" thisChunkSize="5276" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/3.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="4" address="0000176d">
-      <chunk id="4" blockSize="96" thisChunkSize="96" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="4" address="00001580">
+      <chunk id="4" address="00001580" chainSize="96" thisChunkSize="96" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/4.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="5" address="000017ec">
-      <chunk id="5" blockSize="358" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="5" address="000015e0">
+      <chunk id="5" address="000015e0" chainSize="358" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/5.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="6" address="00001a0b">
-      <chunk id="6" blockSize="40" thisChunkSize="40" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="6" address="000017e0">
+      <chunk id="6" address="000017e0" chainSize="40" thisChunkSize="40" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/6.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="7" address="00001a52">
-      <chunk id="7" blockSize="225" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="7" address="00001808">
+      <chunk id="7" address="00001808" chainSize="225" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/7.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="8" address="00001c71">
-      <chunk id="8" blockSize="96" thisChunkSize="96" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="8" address="00001a08">
+      <chunk id="8" address="00001a08" chainSize="96" thisChunkSize="96" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/8.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="9" address="00001cf0">
-      <chunk id="9" blockSize="169" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="9" address="00001a68">
+      <chunk id="9" address="00001a68" chainSize="169" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/9.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="a" address="00001f0f">
-      <chunk id="a" blockSize="100" thisChunkSize="100" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="a" address="00001c68">
+      <chunk id="a" address="00001c68" chainSize="100" thisChunkSize="100" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/a.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="b" address="00001f92">
-      <chunk id="b" blockSize="1617" thisChunkSize="1617" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="b" address="00001ccc">
+      <chunk id="b" address="00001ccc" chainSize="1617" thisChunkSize="1617" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/b.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="c" address="00002602">
-      <chunk id="c" blockSize="32" thisChunkSize="32" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="c" address="0000231d">
+      <chunk id="c" address="0000231d" chainSize="32" thisChunkSize="32" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/c.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="d" address="00002641">
-      <chunk id="d" blockSize="46" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="d" address="0000233d">
+      <chunk id="d" address="0000233d" chainSize="46" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/d.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="e" address="00002860">
-      <chunk id="e" blockSize="38" thisChunkSize="38" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="e" address="0000253d">
+      <chunk id="e" address="0000253d" chainSize="38" thisChunkSize="38" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/e.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="f" address="000028a5">
-      <chunk id="f" blockSize="18" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="f" address="00002563">
+      <chunk id="f" address="00002563" chainSize="18" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/f.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="10" address="00002ac4">
-      <chunk id="10" blockSize="40" thisChunkSize="40" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="10" address="00002763">
+      <chunk id="10" address="00002763" chainSize="40" thisChunkSize="40" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/10.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
-   <chain id="11" address="00002b0b">
-      <chunk id="11" blockSize="328" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="11" address="0000278b">
+      <chunk id="11" address="0000278b" chainSize="328" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="test.epf.data/11.xml"/>
-         <address>0</address>
       </chunk>
    </chain>
    <index>
-      <entry attributesAddress="0000022f" contentAddress="000002b2" reserved="7fffffff"/>
-      <entry attributesAddress="0000176d" contentAddress="000017ec" reserved="7fffffff"/>
-      <entry attributesAddress="00001a0b" contentAddress="00001a52" reserved="7fffffff"/>
-      <entry attributesAddress="00001c71" contentAddress="00001cf0" reserved="7fffffff"/>
-      <entry attributesAddress="00001f0f" contentAddress="00001f92" reserved="7fffffff"/>
-      <entry attributesAddress="00002602" contentAddress="00002641" reserved="7fffffff"/>
-      <entry attributesAddress="00002860" contentAddress="000028a5" reserved="7fffffff"/>
-      <entry attributesAddress="00002ac4" contentAddress="00002b0b" reserved="7fffffff"/>
+      <entry attributesAddress="00001580" contentAddress="000015e0" reserved="7fffffff"/>
+      <entry attributesAddress="000017e0" contentAddress="00001808" reserved="7fffffff"/>
+      <entry attributesAddress="00000080" contentAddress="000000e4" reserved="7fffffff"/>
+      <entry attributesAddress="00002763" contentAddress="0000278b" reserved="7fffffff"/>
+      <entry attributesAddress="00001c68" contentAddress="00001ccc" reserved="7fffffff"/>
+      <entry attributesAddress="0000231d" contentAddress="0000233d" reserved="7fffffff"/>
+      <entry attributesAddress="00001a08" contentAddress="00001a68" reserved="7fffffff"/>
+      <entry attributesAddress="0000253d" contentAddress="00002563" reserved="7fffffff"/>
    </index>
    <files>
       <399d416e-c884-44f5-80c3-eb996449e2d2 name="399d416e-c884-44f5-80c3-eb996449e2d2" chain="5" creationDate="2016-08-18T19:19:54+03:00" modifyDate="2016-08-18T19:19:54+03:00" reserved="0" name="399d416e-c884-44f5-80c3-eb996449e2d2" chain="4"/>
       <copyinfo name="copyinfo" chain="7" creationDate="2016-08-18T19:19:54+03:00" modifyDate="2016-08-18T19:19:54+03:00" reserved="0" name="copyinfo" chain="6"/>
       <1378b942-4663-407c-933e-b1b3543bbd6a.0 name="1378b942-4663-407c-933e-b1b3543bbd6a.0" chain="3" creationDate="2016-08-18T19:19:54+03:00" modifyDate="2016-08-18T19:19:54+03:00" reserved="0" name="1378b942-4663-407c-933e-b1b3543bbd6a.0" chain="2">
          <container firstFreeChunkAddress="2147483647" defaultChunkSize="512" reservedMaybeFilesCount="1" reservedUnknown="0">
-            <chain id="12" address="00000010">
-               <chunk id="12" blockSize="24" thisChunkSize="24" nextChunkAddress="7fffffff" nextChunkPresent="false">
-                  <data file="test.epf.data/12.1378b942.4663.407c.933e.b1b3543bbd6a.0.xml"/>
-                  <address>0</address>
+            <chain id="18" address="00000000">
+               <chunk id="18" address="00000000" chainSize="24" thisChunkSize="0" nextChunkAddress="00000000" nextChunkPresent="false">
+                  <data file="test.epf.data/18.1378b942.4663.407c.933e.b1b3543bbd6a.0.xml"/>
                </chunk>
             </chain>
-            <chain id="13" address="00000047">
-               <chunk id="13" blockSize="32" thisChunkSize="32" nextChunkAddress="7fffffff" nextChunkPresent="false">
+            <chain id="13" address="00000038">
+               <chunk id="13" address="00000038" chainSize="32" thisChunkSize="32" nextChunkAddress="7fffffff" nextChunkPresent="false">
                   <data file="test.epf.data/13.1378b942.4663.407c.933e.b1b3543bbd6a.0.xml"/>
-                  <address>0</address>
                </chunk>
             </chain>
-            <chain id="14" address="00000086">
-               <chunk id="14" blockSize="15" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+            <chain id="14" address="00000058">
+               <chunk id="14" address="00000058" chainSize="15" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
                   <data file="test.epf.data/14.1378b942.4663.407c.933e.b1b3543bbd6a.0.xml"/>
-                  <address>0</address>
                </chunk>
             </chain>
-            <chain id="15" address="000002a5">
-               <chunk id="15" blockSize="32" thisChunkSize="32" nextChunkAddress="7fffffff" nextChunkPresent="false">
+            <chain id="15" address="00000258">
+               <chunk id="15" address="00000258" chainSize="32" thisChunkSize="32" nextChunkAddress="7fffffff" nextChunkPresent="false">
                   <data file="test.epf.data/15.1378b942.4663.407c.933e.b1b3543bbd6a.0.xml"/>
-                  <address>0</address>
                </chunk>
             </chain>
-            <chain id="16" address="000002e4">
-               <chunk id="16" blockSize="65142" thisChunkSize="65142" nextChunkAddress="7fffffff" nextChunkPresent="false">
+            <chain id="16" address="00000278">
+               <chunk id="16" address="00000278" chainSize="65142" thisChunkSize="65142" nextChunkAddress="7fffffff" nextChunkPresent="false">
                   <data file="test.epf.data/16.1378b942.4663.407c.933e.b1b3543bbd6a.0.xml"/>
-                  <address>0</address>
                </chunk>
             </chain>
             <index>
-               <entry attributesAddress="00000047" contentAddress="00000086" reserved="7fffffff"/>
-               <entry attributesAddress="000002a5" contentAddress="000002e4" reserved="7fffffff"/>
+               <entry attributesAddress="00000258" contentAddress="00000278" reserved="7fffffff"/>
+               <entry attributesAddress="00000038" contentAddress="00000058" reserved="7fffffff"/>
             </index>
             <files>
                <text name="text" chain="16" creationDate="2016-08-08T15:19:12+03:00" modifyDate="2016-08-18T19:19:54+03:00" reserved="0" name="text" chain="15"/>
                <info name="info" chain="14" creationDate="2016-08-08T15:19:12+03:00" modifyDate="2016-08-18T19:19:54+03:00" reserved="0" name="info" chain="13"/>
             </files>
             <chainIndex id="0">
-               <00000010 chain="12"/>
-               <000002e4 chain="16"/>
-               <000002a5 chain="15"/>
-               <00000086 chain="14"/>
-               <00000047 chain="13"/>
+               <00000258 chain="15"/>
+               <00000278 chain="16"/>
+               <00000038 chain="13"/>
+               <00000058 chain="14"/>
             </chainIndex>
          </container>
       </1378b942-4663-407c-933e-b1b3543bbd6a.0>
       <versions name="versions" chain="11" creationDate="2016-08-18T19:19:54+03:00" modifyDate="2016-08-18T19:19:54+03:00" reserved="0" name="versions" chain="10"/>
       <e6c0fce0-6408-4641-9fb4-f4f530ea5e20.0 name="e6c0fce0-6408-4641-9fb4-f4f530ea5e20.0" chain="b" creationDate="2016-08-18T18:57:18+03:00" modifyDate="2016-08-18T18:57:18+03:00" reserved="0" name="e6c0fce0-6408-4641-9fb4-f4f530ea5e20.0" chain="a">
          <container firstFreeChunkAddress="2147483647" defaultChunkSize="512" reservedMaybeFilesCount="2" reservedUnknown="0">
-            <chain id="1b" address="00000010">
-               <chunk id="1b" blockSize="24" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
-                  <data file="test.epf.data/1b.e6c0fce0.6408.4641.9fb4.f4f530ea5e20.0.xml"/>
-                  <address>0</address>
+            <chain id="23" address="00000000">
+               <chunk id="23" address="00000000" chainSize="24" thisChunkSize="0" nextChunkAddress="00000000" nextChunkPresent="false">
+                  <data file="test.epf.data/23.e6c0fce0.6408.4641.9fb4.f4f530ea5e20.0.xml"/>
                </chunk>
             </chain>
-            <chain id="1c" address="0000022f">
-               <chunk id="1c" blockSize="32" thisChunkSize="32" nextChunkAddress="7fffffff" nextChunkPresent="false">
-                  <data file="test.epf.data/1c.e6c0fce0.6408.4641.9fb4.f4f530ea5e20.0.xml"/>
-                  <address>0</address>
-               </chunk>
-            </chain>
-            <chain id="1d" address="0000026e">
-               <chunk id="1d" blockSize="36" thisChunkSize="36" nextChunkAddress="7fffffff" nextChunkPresent="false">
+            <chain id="1d" address="00000038">
+               <chunk id="1d" address="00000038" chainSize="32" thisChunkSize="32" nextChunkAddress="7fffffff" nextChunkPresent="false">
                   <data file="test.epf.data/1d.e6c0fce0.6408.4641.9fb4.f4f530ea5e20.0.xml"/>
-                  <address>0</address>
                </chunk>
             </chain>
-            <chain id="1e" address="000002b1">
-               <chunk id="1e" blockSize="499" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+            <chain id="1e" address="00000058">
+               <chunk id="1e" address="00000058" chainSize="36" thisChunkSize="36" nextChunkAddress="7fffffff" nextChunkPresent="false">
                   <data file="test.epf.data/1e.e6c0fce0.6408.4641.9fb4.f4f530ea5e20.0.xml"/>
-                  <address>0</address>
                </chunk>
             </chain>
-            <chain id="1f" address="000004d0">
-               <chunk id="1f" blockSize="5411" thisChunkSize="5411" nextChunkAddress="7fffffff" nextChunkPresent="false">
+            <chain id="1f" address="0000007c">
+               <chunk id="1f" address="0000007c" chainSize="499" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
                   <data file="test.epf.data/1f.e6c0fce0.6408.4641.9fb4.f4f530ea5e20.0.xml"/>
-                  <address>0</address>
+               </chunk>
+            </chain>
+            <chain id="20" address="0000027c">
+               <chunk id="20" address="0000027c" chainSize="5411" thisChunkSize="5411" nextChunkAddress="7fffffff" nextChunkPresent="false">
+                  <data file="test.epf.data/20.e6c0fce0.6408.4641.9fb4.f4f530ea5e20.0.xml"/>
                </chunk>
             </chain>
             <index>
-               <entry attributesAddress="0000022f" contentAddress="000004d0" reserved="7fffffff"/>
-               <entry attributesAddress="0000026e" contentAddress="000002b1" reserved="7fffffff"/>
+               <entry attributesAddress="00000038" contentAddress="0000027c" reserved="7fffffff"/>
+               <entry attributesAddress="00000058" contentAddress="0000007c" reserved="7fffffff"/>
             </index>
             <files>
-               <form name="form" chain="1f" creationDate="2016-08-18T18:57:13+03:00" modifyDate="2016-08-18T18:57:13+03:00" reserved="0" name="form" chain="1c"/>
-               <module name="module" chain="1e" creationDate="2016-08-18T18:57:13+03:00" modifyDate="2016-08-18T18:57:13+03:00" reserved="0" name="module" chain="1d"/>
+               <form name="form" chain="20" creationDate="2016-08-18T18:57:13+03:00" modifyDate="2016-08-18T18:57:13+03:00" reserved="0" name="form" chain="1d"/>
+               <module name="module" chain="1f" creationDate="2016-08-18T18:57:13+03:00" modifyDate="2016-08-18T18:57:13+03:00" reserved="0" name="module" chain="1e"/>
             </files>
             <chainIndex id="1">
-               <00000010 chain="1b"/>
-               <000004d0 chain="1f"/>
-               <000002b1 chain="1e"/>
-               <0000026e chain="1d"/>
-               <0000022f chain="1c"/>
+               <00000038 chain="1d"/>
+               <00000058 chain="1e"/>
+               <0000027c chain="20"/>
+               <0000007c chain="1f"/>
             </chainIndex>
          </container>
       </e6c0fce0-6408-4641-9fb4-f4f530ea5e20.0>
@@ -219,22 +190,21 @@
       <version name="version" chain="f" creationDate="2016-08-18T19:19:54+03:00" modifyDate="2016-08-18T19:19:54+03:00" reserved="0" name="version" chain="e"/>
    </files>
    <chainIndex id="2">
-      <00002860 chain="e"/>
-      <00002641 chain="d"/>
-      <00002602 chain="c"/>
-      <00002ac4 chain="10"/>
-      <000028a5 chain="f"/>
-      <00001a0b chain="6"/>
-      <00002b0b chain="11"/>
-      <000017ec chain="5"/>
-      <0000176d chain="4"/>
-      <0000022f chain="2"/>
-      <00001f0f chain="a"/>
-      <00000010 chain="1"/>
-      <00001cf0 chain="9"/>
-      <00001c71 chain="8"/>
-      <000002b2 chain="3"/>
-      <00001a52 chain="7"/>
-      <00001f92 chain="b"/>
+      <00001580 chain="4"/>
+      <000015e0 chain="5"/>
+      <000017e0 chain="6"/>
+      <00000080 chain="2"/>
+      <00002763 chain="10"/>
+      <00002563 chain="f"/>
+      <000000e4 chain="3"/>
+      <00001808 chain="7"/>
+      <00001c68 chain="a"/>
+      <00001a08 chain="8"/>
+      <00001a68 chain="9"/>
+      <0000278b chain="11"/>
+      <00001ccc chain="b"/>
+      <0000231d chain="c"/>
+      <0000233d chain="d"/>
+      <0000253d chain="e"/>
    </chainIndex>
 </v8fs>

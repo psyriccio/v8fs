@@ -46,15 +46,20 @@ public class ContainerAssembler {
             }
         }
     }
-    
+
     public static Container assemble(File dir, boolean deflate) throws IOException {
         Container cont = new Container();
-        cont.setIndex(new Index());
+        cont.getContainerContext().put("FileName", dir.getName().replace("\\.v8$", ""));
+        Index index = new Index();
+        index.setContainerContext(cont.getContainerContext());
+        cont.setIndex(index);
         cont.getIndex().setEntries(new ArrayList<>());
         cont.setHeader(new ContainerHeader(32, 512, 0, 0, cont.getContainerContext()));
         for(File fl : dir.listFiles()) {
             if(fl.isDirectory()) {
-                cont.addFile(fl.getName().replaceAll("\\.v8$", ""), assemble(fl, false), deflate);
+                Container child = assemble(fl, false);
+                child.setContainerContext(cont.getContainerContext());
+                cont.addFile(fl.getName().replaceAll("\\.v8$", ""), child, deflate);
             } else {
                 cont.addFile(fl.getName(), Files.readAllBytes(fl.toPath()), deflate);
             }
@@ -62,6 +67,6 @@ public class ContainerAssembler {
         cont.recalcOffsetsAndRebuildIndex();
         return cont;
     }
-    
+
 
 }

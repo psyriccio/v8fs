@@ -46,7 +46,7 @@
    </xsd:complexType>
    <xsd:complexType name="chunkHeader">
       <xsd:sequence/>
-      <xsd:attribute name="blockSize" type="xsd:long" use="required"/>
+      <xsd:attribute name="chainSize" type="xsd:long" use="required"/>
       <xsd:attribute name="thisChunkSize" type="xsd:long" use="required"/>
       <xsd:attribute name="nextChunkAddress" type="xsd:string"/>
       <xsd:attribute name="nextChunkPresent" type="xsd:boolean" use="required"/>
@@ -78,13 +78,13 @@
                <xsd:attribute name="file" type="xsd:string"/>
             </xsd:complexType>
          </xsd:element>
-         <xsd:element name="address" type="xsd:long"/>
       </xsd:sequence>
       <xsd:attribute name="id" type="xsd:ID"/>
-      <xsd:attribute name="blockSize" type="xsd:long" use="required"/>
+      <xsd:attribute name="chainSize" type="xsd:long" use="required"/>
       <xsd:attribute name="thisChunkSize" type="xsd:long" use="required"/>
       <xsd:attribute name="nextChunkAddress" type="xsd:string"/>
       <xsd:attribute name="nextChunkPresent" type="xsd:boolean" use="required"/>
+      <xsd:attribute name="address" type="xsd:string"/>
    </xsd:complexType>
    <xsd:complexType name="fileAdaptedMap">
       <xsd:sequence>

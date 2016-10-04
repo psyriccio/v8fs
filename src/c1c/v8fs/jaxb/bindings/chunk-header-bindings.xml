@@ -9,7 +9,7 @@
 
         <java-type name="c1c.v8fs.ChunkHeader" xml-accessor-type="FIELD">
             <java-attributes>
-                <xml-attribute java-attribute="blockSize" name="blockSize" />
+                <xml-attribute java-attribute="chainSize" name="chainSize" />
                 <xml-attribute java-attribute="thisChunkSize" name="thisChunkSize" />
                 <xml-attribute java-attribute="nextChunkPresent" name="nextChunkPresent" />
                 <xml-attribute java-attribute="nextChunkAddress" name="nextChunkAddress" >

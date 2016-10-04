@@ -1,129 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <v8fs firstFreeChunkAddress="2147483647" defaultChunkSize="512" reservedMaybeFilesCount="0" reservedUnknown="0">
    <chain id="1" address="00000010">
-      <chunk id="1" blockSize="96" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+      <chunk id="1" blockSize="96" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/1.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="2" address="0000022f">
-      <chunk id="2" blockSize="364" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="2" address="0000002f">
+      <chunk id="2" blockSize="90" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/2.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="3" address="0000044e">
-      <chunk id="3" blockSize="40" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="3" address="0000004e">
+      <chunk id="3" blockSize="358" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/3.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="4" address="0000066d">
-      <chunk id="4" blockSize="231" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="4" address="0000006d">
+      <chunk id="4" blockSize="34" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/4.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="5" address="0000088c">
-      <chunk id="5" blockSize="100" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="5" address="0000008c">
+      <chunk id="5" blockSize="225" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/5.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="6" address="00000aab">
-      <chunk id="6" blockSize="5104" thisChunkSize="5098" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="6" address="000000ab">
+      <chunk id="6" blockSize="94" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/6.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="7" address="00001eb4">
-      <chunk id="7" blockSize="40" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="7" address="000000ca">
+      <chunk id="7" blockSize="5018" thisChunkSize="5018" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/7.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="8" address="000020d3">
-      <chunk id="8" blockSize="334" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="8" address="00001483">
+      <chunk id="8" blockSize="34" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/8.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="9" address="000022f2">
-      <chunk id="9" blockSize="100" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="9" address="000014a2">
+      <chunk id="9" blockSize="328" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/9.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="a" address="00002511">
-      <chunk id="a" blockSize="1621" thisChunkSize="1615" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="a" address="000014c1">
+      <chunk id="a" blockSize="94" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/a.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="b" address="00002b7f">
-      <chunk id="b" blockSize="32" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="b" address="000014e0">
+      <chunk id="b" blockSize="1444" thisChunkSize="1444" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/b.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="c" address="00002d9e">
-      <chunk id="c" blockSize="52" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="c" address="00001aa3">
+      <chunk id="c" blockSize="26" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/c.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="d" address="00002fbd">
-      <chunk id="d" blockSize="96" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="d" address="00001ac2">
+      <chunk id="d" blockSize="46" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/d.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="e" address="000031dc">
-      <chunk id="e" blockSize="175" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="e" address="00001ae1">
+      <chunk id="e" blockSize="90" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/e.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="f" address="000033fb">
-      <chunk id="f" blockSize="38" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="f" address="00001b00">
+      <chunk id="f" blockSize="169" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/f.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <chain id="10" address="0000361a">
-      <chunk id="10" blockSize="24" thisChunkSize="512" nextChunkAddress="7fffffff" nextChunkPresent="false">
+   <chain id="10" address="00001b1f">
+      <chunk id="10" blockSize="32" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
          <data file="asm_test.epf.data/10.xml"/>
          <address>0</address>
       </chunk>
    </chain>
-   <index>
-      <entry attributesAddress="b2d36a0d" contentAddress="6a0d2a73" reserved="2a73b2d3"/>
-      <entry attributesAddress="34006400" contentAddress="36003100" reserved="2d006500"/>
-      <entry attributesAddress="38006300" contentAddress="34003800" reserved="34002d00"/>
-      <entry attributesAddress="66003400" contentAddress="2d003500" reserved="30003800"/>
-      <entry attributesAddress="33006300" contentAddress="65002d00" reserved="39006200"/>
-      <entry attributesAddress="36003900" contentAddress="34003400" reserved="65003900"/>
-      <entry attributesAddress="64003200" contentAddress="00003200" reserved="00000000"/>
-   </index>
-   <files>
-      <@NULL/>
-   </files>
+   <chain id="11" address="00001b3e">
+      <chunk id="11" blockSize="18" thisChunkSize="0" nextChunkAddress="7fffffff" nextChunkPresent="false">
+         <data file="asm_test.epf.data/11.xml"/>
+         <address>0</address>
+      </chunk>
+   </chain>
+   <index/>
+   <files/>
    <chainIndex id="0">
-      <00000aab chain="6"/>
-      <0000088c chain="5"/>
-      <0000066d chain="4"/>
-      <0000044e chain="3"/>
-      <0000022f chain="2"/>
+      <000014e0 chain="b"/>
+      <00001b00 chain="f"/>
+      <000014c1 chain="a"/>
+      <00001ae1 chain="e"/>
+      <000014a2 chain="9"/>
+      <00001ac2 chain="d"/>
+      <00001483 chain="8"/>
+      <00001aa3 chain="c"/>
+      <000000ca chain="7"/>
+      <000000ab chain="6"/>
+      <0000008c chain="5"/>
+      <0000006d chain="4"/>
+      <0000004e chain="3"/>
+      <0000002f chain="2"/>
       <00000010 chain="1"/>
-      <00002511 chain="a"/>
-      <000022f2 chain="9"/>
-      <000020d3 chain="8"/>
-      <00001eb4 chain="7"/>
-      <0000361a chain="10"/>
-      <000033fb chain="f"/>
-      <000031dc chain="e"/>
-      <00002fbd chain="d"/>
-      <00002d9e chain="c"/>
-      <00002b7f chain="b"/>
+      <00001b3e chain="11"/>
+      <00001b1f chain="10"/>
    </chainIndex>
 </v8fs>

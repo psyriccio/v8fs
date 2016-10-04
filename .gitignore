@@ -1,5 +1,5 @@
 /build/*
-!/build/docs
+/build/docs
 .nb-gradle*
 .gradletasknamecache
 projectKnowledge

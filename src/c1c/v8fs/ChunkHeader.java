@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChunkHeader implements Bufferable {
 
-    private long blockSize;
+    private long chainSize;
     private long thisChunkSize;
     private long nextChunkAddress;
     private boolean nextChunkPresent;
@@ -40,6 +40,17 @@ public class ChunkHeader implements Bufferable {
     }
 
     private String intToHex(long i) {
+        String buf = UnsignedInteger.fromIntBits((int) i).toString(16) ; //.toString(16);
+        while (buf.length() < 8) {
+            buf = "0" + buf;
+        }
+        if (buf.length() > 8) {
+            buf = buf.substring(0, 7);
+        }
+        return buf;
+    }
+
+        private String intToHexSpec(long i) {
         String buf = UnsignedInteger.fromIntBits((int) i  & 0x7fffffff).toString(16) ; //.toString(16);
         while (buf.length() < 8) {
             buf = "0" + buf;
@@ -55,7 +66,7 @@ public class ChunkHeader implements Bufferable {
     }
 
     private String toStringBuffer() {
-        return "\r\n" + intToHex(blockSize) + " " + intToHex(thisChunkSize) + " " + (nextChunkPresent ? intToHex(nextChunkAddress) : intToHex(UnsignedInteger.MAX_VALUE.longValue()) + " \r\n");
+        return '\u0d0a' + intToHex(chainSize) + ' ' + intToHex(thisChunkSize) + ' ' + (nextChunkPresent ? intToHex(nextChunkAddress) : intToHexSpec(UnsignedInteger.MAX_VALUE.longValue()) + ' ' +'\u0d0a');
     }
 
     private void fromStringBuffer(String str) {
@@ -67,7 +78,7 @@ public class ChunkHeader implements Bufferable {
                 throw new RuntimeException("Format error");
             }
 
-            blockSize = hexToInt(get8Chars(buf));
+            chainSize = hexToInt(get8Chars(buf));
 
             b = (char) buf.get();
             if (b != ' ') {

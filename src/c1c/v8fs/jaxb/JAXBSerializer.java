@@ -136,14 +136,19 @@ public class JAXBSerializer {
 
         for (c1c.v8fs.File fl : cont.getFiles().values()) {
             Container cnt = fl.getChild();
-            byte[] flContentInf = fl.getContent().getDataInflate();
+            byte[] flContentInf = null;
+            try {
+                flContentInf = fl.getContent().getDataInflate();
+            } catch (Exception ex) {
+                flContentInf = null;
+            }
             if(flContentInf != null) {
                 File rawFileInf = new File(dir, fl.getName() + ".inf.raw");
                 try (FileOutputStream rawFileOutInf = new FileOutputStream(rawFileInf)) {
                     rawFileOutInf.write(flContentInf);
                     rawFileOutInf.flush();
                 }
-                
+
             } else {
                 byte[] flContent = fl.getContent().getData();
                 File rawFile = new File(dir, fl.getName() + ".raw");

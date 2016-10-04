@@ -52,13 +52,13 @@ public class Container implements Bufferable {
     }
 
     public Container(HashMap<String, Object> parentContext, String suffix) {
-        containerContext = (HashMap<String, Object>) parentContext.clone();
-        String newSuffix = (String) containerContext.getOrDefault("Suffix", "");
+        this.containerContext = (HashMap<String, Object>) parentContext.clone();
+        String newSuffix = (String) getContainerContext().getOrDefault("Suffix", "");
         if (!newSuffix.isEmpty()) {
             newSuffix += ".";
         }
         newSuffix += suffix;
-        containerContext.put("Suffix", newSuffix);
+        getContainerContext().put("Suffix", newSuffix);
         chains = new ArrayList<>();
         chains.add(null);
         files = new HashMap<>();
@@ -76,14 +76,14 @@ public class Container implements Bufferable {
     @Override
     public void readFromBuffer(ByteBuffer buffer) {
         header = new ContainerHeader();
-        header.setContainerContext(containerContext);
+        header.setContainerContext(getContainerContext());
         header.readFromBuffer(buffer);
         chains = new ArrayList<>();
         index = null;
         chainIndex = new HashMap<>();
         while (buffer.hasRemaining()) {
             Chain chain = new Chain();
-            chain.setContainerContext(containerContext);
+            chain.setContainerContext(getContainerContext());
             chain.readFromBuffer(buffer);
             chains.add(chain);
             chainIndex.put(chain.getAddress(), chain);
@@ -95,7 +95,7 @@ public class Container implements Bufferable {
         files = new HashMap<>();
         index.getEntries().stream().map((idx) -> {
             Attributes attr = new Attributes();
-            attr.setContainerContext(containerContext);
+            attr.setContainerContext(getContainerContext());
             Chain attrChain = chainIndex.get(
                     idx.getAttributesAddress()
             );
@@ -107,7 +107,7 @@ public class Container implements Bufferable {
             }
             Chain content = chainIndex.get(idx.getContentAddress());
             File file = new File();
-            file.setContainerContext(containerContext);
+            file.setContainerContext(getContainerContext());
             file.setAttributes(attr);
             file.setContent(content);
             return file;
@@ -117,12 +117,13 @@ public class Container implements Bufferable {
         }).forEach((file) -> {
             files.put(file.getAttributes().getName(), file);
         });
+        recalcOffsetsAndRebuildIndex();
     }
 
     public void recalcOffsetsAndRebuildIndex() {
         this.getIndex().getEntries().clear();
         this.getChainIndex().clear();
-        int indexSize = 18 * this.getFiles().size();
+        int indexSize = 12 * this.getFiles().size();
         int headerSize = 32;
         int baseOffset = headerSize + indexSize;
         final AtomicInteger offset = new AtomicInteger(baseOffset);
@@ -151,17 +152,17 @@ public class Container implements Bufferable {
                             file.getContent().getAddress(),
                             file.getContent()
                     );
-            this.getIndex().getEntries().add(
-                    new IndexEntry(
-                            file.getAttributes().getChain().getAddress(),
-                            file.getContent().getAddress(),
-                            Integer.MAX_VALUE,
-                            containerContext
-                    )
+            IndexEntry indEnt = new IndexEntry(
+                    file.getAttributes().getChain().getAddress(),
+                    file.getContent().getAddress(),
+                    Integer.MAX_VALUE,
+                    getContainerContext()
             );
+            indEnt.setContainerContext(getContainerContext());
+            this.getIndex().getEntries().add(indEnt);
         });
         this.chains.remove(0);
-        this.chains.add(0, new Chain(this.getIndex().asByteArray(), (int) this.getHeader().getDefaultChunkSize()));
+        this.chains.add(0, new Chain(this.getIndex().asByteArray(), (int) this.getHeader().getDefaultChunkSize(), getContainerContext()));
     }
 
     public void addFile(String name, byte[] content, boolean deflate) throws IOException {
@@ -175,21 +176,19 @@ public class Container implements Bufferable {
             data = content;
         }
 
-        Chain dataChain = new Chain(data, (int) this.getHeader().getDefaultChunkSize());
+        Chain dataChain = new Chain(data, (int) this.getHeader().getDefaultChunkSize(), getContainerContext());
+        dataChain.setContainerContext(getContainerContext());
         Date date = new Date();
-        Attributes attributes = new Attributes(date, date, 0, name, null, containerContext);
-        Chain attrChain = new Chain(attributes.asByteArray(), (int) this.getHeader().getDefaultChunkSize());
+        Attributes attributes = new Attributes(date, date, 0, name, null, getContainerContext());
+        Chain attrChain = new Chain(attributes.asByteArray(), (int) this.getHeader().getDefaultChunkSize(), getContainerContext());
+        attrChain.setContainerContext(getContainerContext());
         attributes.setChain(attrChain);
 
-        File fl = new File(name, attributes, dataChain, this, containerContext);
+        File fl = new File(name, attributes, dataChain, this, getContainerContext());
 
         this.getChains().add(attrChain);
         this.getChains().add(dataChain);
 
-        for (Chunk chunk : dataChain.getChunks()) {
-            chunk.setAddress(this.getHeader().getFirstFreeChunkAddress());
-            this.getHeader().setFirstFreeChunkAddress(this.getHeader().getFirstFreeChunkAddress() + chunk.getHeader().getThisChunkSize());
-        }
         this.getFiles().put(fl.getName(), fl);
     }
 

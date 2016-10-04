@@ -7,4 +7,4 @@
 XML schema: [test.epf.xsd](./test-data/test.epf.v8fs/test.epf.xsd)
 
 
-Лицензия: [LGPLv3](./LICENSE.TXT)
+##### [javadoc](https://psyriccio.github.io/v8fs/) Лицензия: [LGPLv3](./LICENSE.TXT)

@@ -58,6 +58,13 @@ public class Main {
     public static void printInfo(Container container) {
         container.getChains().stream().forEach((ch) -> {
             System.out.println("0x" + to8Digits(Long.toHexString(ch.getAddress())));
+            String chunks = ch.getChunks().stream()
+                    .map((chunk) -> "\t0x" + to8Digits(Long.toHexString(chunk.getAddress()))
+                    + ": " + to8Digits(Long.toHexString(chunk.getHeader().getChainSize()))
+                    + ", " + to8Digits(Long.toHexString(chunk.getHeader().getNextChunkAddress()))
+                    + ", " + to8Digits(Long.toHexString(chunk.getHeader().getThisChunkSize())) + "\n")
+                    .reduce("", String::concat);
+            System.out.println(chunks);
         });
         System.out.println("Readed " + Integer.toString(container.getChains().size()) + " chains");
         System.out.println("Content:");
@@ -92,7 +99,7 @@ public class Main {
     public static void main(String[] args) throws IOException, JAXBException {
 
         if (args.length == 0) {
-            args = new String[]{"./test-data/test.epf"};
+            args = new String[]{"./test-data/asm_test.epf"};
         }
 
         if (args.length == 0) {
@@ -118,7 +125,7 @@ public class Main {
         int size = buf.position();
         byte[] data = Arrays.copyOfRange(buf.array(), 0, size);
         Files.write(data, new File(new File("test-data/"), "asm_" + new File(args[0]).getName()));
-        
+
         final String arg0 = args[0];
 
 //            context.generateSchema(new SchemaOutputResolver() {

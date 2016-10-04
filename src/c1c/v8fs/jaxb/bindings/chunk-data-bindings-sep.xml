@@ -12,6 +12,9 @@
             <java-attributes>
                 <xml-attribute java-attribute="id" name="id" xml-id="true" />
                 <xml-transient java-attribute="header" />
+                <xml-attribute java-attribute="address" name="address">
+                    <xml-java-type-adapter value="c1c.v8fs.jaxb.AddressHexAdapter" />
+                </xml-attribute>
                 <xml-element java-attribute="data" name="data">
                     <xml-java-type-adapter value="c1c.v8fs.jaxb.DataArrayAdapter" />
                 </xml-element>

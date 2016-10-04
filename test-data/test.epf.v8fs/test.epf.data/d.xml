@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<v8fs-data-chunk id="d">
+<v8fs-data-chunk id="d" address="0000233d">
    <data id="c">
       <0>e797f7WRjrGlZYqJoVmqbrKFhYmuiUmaqa6FQbKxbmqSpaWZiYllqlGKkU4tAAAAAAA=</0>
       <1>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</1>
@@ -13,5 +13,4 @@
       <9>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</9>
       <a>AAAAAAAAAAAAAAA=</a>
    </data>
-   <address>0</address>
 </v8fs-data-chunk>

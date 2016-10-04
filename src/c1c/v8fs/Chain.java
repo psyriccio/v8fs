@@ -43,35 +43,30 @@ public class Chain implements Bufferable {
         chunks = new ArrayList<>();
     }
 
-    public Chain(byte[] data, int chunkSize) {
+    public Chain(byte[] data, int chunkSize,  HashMap<String, Object> containerContext) {
         setID();
+        this.containerContext = containerContext;
         chunks = new ArrayList<>();
         ByteBuffer buf = ByteBuffer.wrap(data);
         int blockSize = data.length;
         Chunk lastChunk = null;
         while (buf.hasRemaining()) {
-            if (chunkSize <= buf.remaining()) {
-                Chunk chunk = new Chunk(containerContext, buf.array(), blockSize + 6, false);
-                chunks.add(chunk);
-                if(lastChunk != null) {
-                    lastChunk.setNextChunk(chunk);
-                }
-                lastChunk = chunk;
-                break;
+            byte[] chd = new byte[chunkSize];
+            int thisChunkSize = chunkSize;
+            if (buf.remaining() >= chunkSize) {
+                buf.get(chd);
             } else {
-                byte[] chd = new byte[chunkSize];
-                if(buf.remaining() >= chunkSize) {
-                    buf.get(chd);
-                } else {
-                    buf.get(chd, 0, buf.remaining());
-                }
-                Chunk chunk = new Chunk(containerContext, chd, blockSize + 6, buf.hasRemaining());
-                chunks.add(chunk);
-                if(lastChunk != null) {
-                    lastChunk.setNextChunk(chunk);
-                }
-                lastChunk = chunk;
+                buf.get(chd, 0, buf.remaining());
+                thisChunkSize = buf.remaining();
             }
+            Chunk chunk = new Chunk(containerContext, chd, blockSize, buf.hasRemaining());
+            chunk.getHeader().setThisChunkSize(thisChunkSize);
+            chunks.add(chunk);
+            if (lastChunk != null) {
+                lastChunk.setNextChunk(chunk);
+            }
+            lastChunk = chunk;
+
         }
     }
 
@@ -81,9 +76,9 @@ public class Chain implements Bufferable {
         this.chunks = chunks;
         this.containerContext = containerContext;
     }
-    
+
     public byte[] getData() {
-        long length = chunks.get(0).getHeader().getBlockSize();
+        long length = chunks.get(0).getHeader().getChainSize();
         byte[] res = new byte[(int) length];
         ByteBuffer buf = ByteBuffer.wrap(res);
         Chunk chunk = chunks.stream().findFirst().orElse(null);
@@ -106,7 +101,7 @@ public class Chain implements Bufferable {
         InflaterInputStream inf = new InflaterInputStream(in, new Inflater(true));
         return ByteStreams.toByteArray(inf);
     }
-    
+
     @Override
     public void writeToBuffer(ByteBuffer buffer) {
         chunks.stream().forEach((chunk) -> {
@@ -120,17 +115,26 @@ public class Chain implements Bufferable {
         boolean next = true;
         address = buffer.position();
         Chunk lastChunk = null;
+        int chainSize = -1;
         while (next) {
             Chunk chunk = new Chunk();
             chunk.setContainerContext(containerContext);
             chunk.readFromBuffer(buffer);
+            if(chainSize == -1) {
+                chainSize = (int) chunk.getHeader().getChainSize();
+            } else {
+                chainSize -= chunk.getHeader().getThisChunkSize();
+            }
             chunk.setNextChunk(null);
-            if(lastChunk != null) {
+            if (lastChunk != null) {
                 lastChunk.setNextChunk(chunk);
             }
             lastChunk = chunk;
             chunks.add(chunk);
             next = chunk.getHeader().isNextChunkPresent();
+            if(next) {
+                buffer.position((int) chunk.getHeader().getNextChunkAddress());
+            }
         }
     }
 

@@ -22,9 +22,12 @@
                         get-method="getDataFileName"
                     />
                 </xml-attribute>
+                <xml-attribute java-attribute="address" name="address">
+                    <xml-java-type-adapter value="c1c.v8fs.jaxb.AddressHexAdapter" />
+                </xml-attribute>
                 <xml-transient java-attribute="data" />
                 <xml-transient java-attribute="containerContext" />
-                <xml-transient java-attribute="nextChunk" /> 
+                <xml-transient java-attribute="nextChunk" />
             </java-attributes>
         </java-type>
 
